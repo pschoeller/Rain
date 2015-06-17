@@ -1,10 +1,13 @@
 package com.swiftrunner.rain;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
+
 
 public class Game extends Canvas implements Runnable {
 
@@ -51,6 +54,14 @@ public class Game extends Canvas implements Runnable {
 			createBufferStrategy(3);
 			return;
 		}
+		
+		Graphics g = bs.getDrawGraphics();
+		
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		g.dispose();
+		bs.show();
 	}
 	
 	
@@ -59,11 +70,37 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	public void run() {
+		long lastTime = System.nanoTime();
+		long timer = System.currentTimeMillis();
+		final double ns = 1000000000.00/60.0;
+		double delta = 0;
+		int frames = 0;
+		int updates = 0;
 		
+		requestFocus();
+		while(running){
+			long now = System.nanoTime();
+			delta += (now - lastTime)/ns;
+			lastTime = now;
+			while(delta >= 1){
+				update();
+				updates++;
+				delta--;
+			}
+			render();
+			frames++;
+			
+			if(System.currentTimeMillis() - timer > 1000){
+				timer += 1000;
+				frame.setTitle(title + "  |  " + updates + " ups, " + frames + " fps");
+				updates = 0;
+				frames = 0;
+			}
+		}
 	}
 	
 	
-	public void main(String[] args){
+	public static void main(String[] args){
 		Game game = new Game();
 		game.frame.setResizable(false);
 		game.frame.setTitle(Game.title);
