@@ -1,7 +1,6 @@
 package com.swiftrunner.rain;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -65,6 +64,7 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		
+		screen.clear();
 		screen.render();
 		
 		for(int i=0; i<pixels.length; i++){
