@@ -5,8 +5,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
+
+import com.swiftrunner.rain.graphics.Screen;
 
 
 public class Game extends Canvas implements Runnable {
@@ -21,11 +25,17 @@ public class Game extends Canvas implements Runnable {
 	private JFrame frame;
 	private boolean running = false;
 	
+	private Screen screen;
+	
+	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+	
 	
 	public Game(){
 		Dimension size = new Dimension(width*scale, height*scale);
 		setPreferredSize(size);
 		
+		screen = new Screen(width, height);
 		frame = new JFrame();
 
 	}
@@ -55,10 +65,14 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		
-		Graphics g = bs.getDrawGraphics();
+		screen.render();
 		
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, getWidth(), getHeight());
+		for(int i=0; i<pixels.length; i++){
+			pixels[i] = screen.pixels[i];
+		}
+		
+		Graphics g = bs.getDrawGraphics();
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		
 		g.dispose();
 		bs.show();
