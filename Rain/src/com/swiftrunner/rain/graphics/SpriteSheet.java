@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 public class SpriteSheet {
 	private String path;
 	private final int SIZE;
-	public int[] pixels;
+	private int[] pixels;
 	
 	public static SpriteSheet tiles = new SpriteSheet("/textures/spritesheets/spritesheet.png", 256);
 	public static SpriteSheet spawn_level = new SpriteSheet("/textures/spritesheets/spawn-level.png", 48);
@@ -19,6 +19,10 @@ public class SpriteSheet {
 		pixels = new int[SIZE * SIZE];
 		load();
 	}
+	
+	
+	public int getSIZE() { return SIZE; }
+	public int[] getPixels() { return pixels; }
 	
 	
 	private void load(){

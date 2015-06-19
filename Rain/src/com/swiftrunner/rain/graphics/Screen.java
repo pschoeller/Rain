@@ -5,12 +5,12 @@ import java.util.Random;
 public class Screen {
 	
 	private int width, height;
-	public int[] pixels;
+	private int[] pixels;
 	
-	public final int MAP_SIZE = 64;
-	public final int MAP_SIZE_MASK = MAP_SIZE - 1;
-	public int[] tiles = new int[MAP_SIZE * MAP_SIZE];
-	public int xOffset, yOffset;
+	private final int MAP_SIZE = 64;
+	private final int MAP_SIZE_MASK = MAP_SIZE - 1;
+	private int[] tiles = new int[MAP_SIZE * MAP_SIZE];
+	private int xOffset, yOffset;
 	
 	private Random random = new Random();
 	
@@ -24,6 +24,9 @@ public class Screen {
 			tiles[i] = random.nextInt(0xffffff);
 		}
 	}
+	
+	
+	public int[] getPixels(){ return pixels; }
 	
 	
 	public void clear(){
