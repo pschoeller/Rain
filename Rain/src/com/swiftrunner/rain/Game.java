@@ -9,6 +9,7 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.swiftrunner.rain.input.Keyboard;
 import com.swiftrunner.rain.graphics.Screen;
 
 
@@ -22,6 +23,7 @@ public class Game extends Canvas implements Runnable {
 	
 	private Thread thread;
 	private JFrame frame;
+	private Keyboard key;
 	private boolean running = false;
 	int x=0, y=0;
 	
@@ -37,7 +39,9 @@ public class Game extends Canvas implements Runnable {
 		
 		screen = new Screen(width, height);
 		frame = new JFrame();
-
+		key = new Keyboard();
+		
+		addKeyListener(key);
 	}
 	
 	
@@ -81,7 +85,11 @@ public class Game extends Canvas implements Runnable {
 	
 	
 	public void update(){
-		x++; 
+		key.update();
+		if(key.up) y--;
+		if(key.down) y++;
+		if(key.left) x--;
+		if(key.right) x++;
 	}
 	
 	public void run() {
