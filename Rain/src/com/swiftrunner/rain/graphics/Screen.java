@@ -27,8 +27,16 @@ public class Screen {
 	
 	
 	public int[] getPixels(){ return pixels; }
+	public int getWidth() { return width; }
+	public int getHeight() { return height; }
 	
 	
+	public void setOffset(int xOffset, int yOffset){
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
+	}
+
+
 	public void clear(){
 		for(int i=0; i<pixels.length; i++){
 			pixels[i] = 0;
