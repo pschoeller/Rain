@@ -1,12 +1,16 @@
 package com.swiftrunner.rain.graphics;
 
 
+
 public class Sprite {
 	
 	private final int SIZE;
 	private int x, y;
 	private int[] pixels;
 	private SpriteSheet sheet;
+	
+	
+	public static Sprite grass = new Sprite(16,0, 1, SpriteSheet.tiles);
 	
 	
 	public Sprite(int size, int x, int y, SpriteSheet sheet){
