@@ -54,7 +54,8 @@ public class Screen {
 			int ya =  y + yp;
 			for(int x=0; x<tileSpriteSize; x++){
 				int xa = x + xp;
-				if(xa < 0 || xa >= width || ya < 0 || ya >= height) break;
+				if(xa < -tile.getSprite().getSIZE() || xa >= width || ya < 0 || ya >= height) break;
+				if(xa < 0) xa = 0;
 				pixels[xa + ya * width] = tile.getSprite().getPixels()[x + y * tile.getSprite().getSIZE()];
 			}
 		}
