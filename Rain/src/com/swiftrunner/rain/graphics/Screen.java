@@ -2,6 +2,8 @@ package com.swiftrunner.rain.graphics;
 
 import java.util.Random;
 
+import com.swiftrunner.rain.level.tile.Tile;
+
 public class Screen {
 	
 	private int width, height;
@@ -44,14 +46,16 @@ public class Screen {
 	}
 	
 	
-	public void render(int xOffset, int yOffset){
-		for(int y=0; y<height; y++){
-			int yp = y + yOffset;
-			if(yp < 0 || yp >= height) continue;
-			for(int x=0; x<width; x++){
-				int xp = x + xOffset;
-				if(xp < 0 || xp >= width) continue;
-				pixels[xp + yp * width] = Sprite.grass.getPixels()[(x&15) + (y&15) * Sprite.grass.getSIZE()];
+	public void renderTile(int xp, int yp, Tile tile){
+		xp -= xOffset;
+		yp -= yOffset;
+		int tileSpriteSize = tile.getSprite().getSIZE(); 
+		for(int y=0; y<tileSpriteSize; y++){
+			int ya =  y + yp;
+			for(int x=0; x<tileSpriteSize; x++){
+				int xa = x + xp;
+				if(xa < 0 || xa >= width || ya < 0 || ya >= height) break;
+				pixels[xa + ya * width] = tile.getSprite().getPixels()[x + y * tile.getSprite().getSIZE()];
 			}
 		}
 	}
