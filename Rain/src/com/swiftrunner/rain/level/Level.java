@@ -44,10 +44,9 @@ public class Level {
 	
 	
 	private Tile getTile(int x, int y){
-		if(x < 0 || y < 0 || x > width || y > height) return Tile.voidTile;
+		if(x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
 		if(tiles[x + y * width] == 0) return Tile.grass;
 		
-		//if(x<0 || y<0 || x>=width || y>=height) return Tile.voidTile;
 		/*if(tiles[x+y*width] == Tile.col_spawn_floor) return Tile.spawn_floor;
 		if(tiles[x+y*width] == Tile.col_spawn_grass) return Tile.spawn_grass;
 		if(tiles[x+y*width] == Tile.col_spawn_hedge) return Tile.spawn_hedge;

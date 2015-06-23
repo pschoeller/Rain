@@ -11,6 +11,7 @@ public class SpriteSheet {
 	private int[] pixels;
 	
 	public static SpriteSheet tiles = new SpriteSheet("/textures/spritesheets/spritesheet.png", 256);
+	public static SpriteSheet player = new SpriteSheet("/textures/spritesheets/King_Cherno.png", 128);
 	//public static SpriteSheet spawn_level = new SpriteSheet("/textures/spritesheets/spawn-level.png", 48);
 	
 	public SpriteSheet(String path, int size){

@@ -16,7 +16,7 @@ public class Player extends Mob{
 	
 	public Player(Keyboard input){
 		this.input = input;
-		//sprite = Sprite.player_back;
+		sprite = Sprite.player_back_1;
 	}
 	
 	
@@ -24,8 +24,11 @@ public class Player extends Mob{
 		this.x = x;
 		this.y = y;
 		this.input = input;
-		//sprite = Sprite.player_back;
+		sprite = Sprite.player_back_1;
 	}
+	
+	
+	public Sprite getSprite() { return sprite; }
 	
 	
 	public void update(){
@@ -50,49 +53,49 @@ public class Player extends Mob{
 	
 	public void render(Screen screen){
 		if(dir == 0) {
-			//sprite = Sprite.player_forward;
+			sprite = Sprite.player_forward_1;
 			if(walking){
 				if(anim%20 > 10){
-					//sprite = Sprite.player_forward;
+					sprite = Sprite.player_forward_2;
 				} else{
-					//sprite = Sprite.player_forward_1;
+					sprite = Sprite.player_forward_3;
 				}
 			}
 		}
 		
 		if(dir == 1) {
-			//sprite = Sprite.player_right;
+			sprite = Sprite.player_right_1;
 			if(walking){
 				if(anim%20 > 10){
-				//	sprite = Sprite.player_right;
+					sprite = Sprite.player_right_2;
 				} else{
-				//	sprite = Sprite.player_right_1;
+					sprite = Sprite.player_right_3;
 				}
 			}
 		}
 		
 		if(dir == 2) {
-			//sprite = Sprite.player_back;
+			sprite = Sprite.player_back_1;
 			if(walking){
 				if(anim%20 > 10){
-				//	sprite = Sprite.player_back;
+					sprite = Sprite.player_back_2;
 				} else{
-				//	sprite = Sprite.player_back_1;
+					sprite = Sprite.player_back_3;
 				}
 			}
 		}
 		
 		if(dir == 3) {
-			//sprite = Sprite.player_left;
+			sprite = Sprite.player_left_1;
 			if(walking){
 				if(anim%20 > 10){
-				//	sprite = Sprite.player_left;
+					sprite = Sprite.player_left_2;
 				} else{
-				//	sprite = Sprite.player_left_1;
+					sprite = Sprite.player_left_3;
 				}
 			}
 		}
 		
-		//screen.renderPlayer(x, y, sprite);	
+		screen.renderPlayer(x, y, sprite);	
 	}
 }
