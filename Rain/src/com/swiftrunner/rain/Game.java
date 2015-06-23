@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import com.swiftrunner.rain.input.Keyboard;
 import com.swiftrunner.rain.level.Level;
 import com.swiftrunner.rain.level.RandomLevel;
+import com.swiftrunner.rain.entity.mob.Player;
 import com.swiftrunner.rain.graphics.Screen;
 
 
@@ -27,8 +28,8 @@ public class Game extends Canvas implements Runnable {
 	private JFrame frame;
 	private Keyboard key;
 	private Level level;
+	private Player player;
 	private boolean running = false;
-	int x=0, y=0;
 	
 	private Screen screen;
 	
@@ -44,6 +45,7 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 		level = new RandomLevel(64, 64);
+		player = new Player(key);
 		
 		addKeyListener(key);
 	}
@@ -74,7 +76,7 @@ public class Game extends Canvas implements Runnable {
 		}
 		
 		screen.clear();
-		level.render(x, y, screen);
+		level.render(player.getX(), player.getY(), screen);
 		
 		for(int i=0; i<pixels.length; i++){
 			pixels[i] = screen.getPixels()[i];
@@ -90,10 +92,7 @@ public class Game extends Canvas implements Runnable {
 	
 	public void update(){
 		key.update();
-		if(key.up) y--;
-		if(key.down) y++;
-		if(key.left) x--;
-		if(key.right) x++;
+		player.update();
 	}
 	
 	public void run() {
