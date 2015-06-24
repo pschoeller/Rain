@@ -11,6 +11,7 @@ public class Player extends Mob{
 	private Keyboard input;
 	private Sprite sprite;
 	private int anim = 0;
+	private int flip = 0;
 	private boolean walking = false;
 	
 	
@@ -33,6 +34,7 @@ public class Player extends Mob{
 	
 	public void update(){
 		int xa=0, ya=0;
+		
 		if(anim<7500) anim++;
 		else anim = 0;
 		
@@ -55,47 +57,37 @@ public class Player extends Mob{
 		if(dir == 0) {
 			sprite = Sprite.player_forward_1;
 			if(walking){
-				if(anim%20 > 10){
-					sprite = Sprite.player_forward_2;
-				} else{
-					sprite = Sprite.player_forward_3;
-				}
+				if(anim%20 > 10){ sprite = Sprite.player_forward_2; } 
+				else { sprite = Sprite.player_forward_3; }
 			}
 		}
 		
 		if(dir == 1) {
-			sprite = Sprite.player_right_1;
+			flip = 0;
+			sprite = Sprite.player_side_1;
 			if(walking){
-				if(anim%20 > 10){
-					sprite = Sprite.player_right_2;
-				} else{
-					sprite = Sprite.player_right_3;
-				}
+				if(anim%20 > 10) { sprite = Sprite.player_side_2; }
+				else { sprite = Sprite.player_side_3; }
 			}
 		}
 		
 		if(dir == 2) {
 			sprite = Sprite.player_back_1;
 			if(walking){
-				if(anim%20 > 10){
-					sprite = Sprite.player_back_2;
-				} else{
-					sprite = Sprite.player_back_3;
-				}
+				if(anim%20 > 10) { sprite = Sprite.player_back_2; }
+				else { sprite = Sprite.player_back_3; }
 			}
 		}
 		
 		if(dir == 3) {
-			sprite = Sprite.player_left_1;
+			flip = 1;
+			sprite = Sprite.player_side_1;
 			if(walking){
-				if(anim%20 > 10){
-					sprite = Sprite.player_left_2;
-				} else{
-					sprite = Sprite.player_left_3;
-				}
+				if(anim%20 > 10) { sprite = Sprite.player_side_2; }
+				else { sprite = Sprite.player_side_3; }
 			}
 		}
 		
-		screen.renderPlayer(x, y, sprite);	
+		screen.renderPlayer(x, y, sprite, flip);	
 	}
 }

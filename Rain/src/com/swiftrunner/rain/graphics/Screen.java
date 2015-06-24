@@ -63,17 +63,22 @@ public class Screen {
 	}
 	
 	
-	public void renderPlayer(int xp, int yp, Sprite player){
+	public void renderPlayer(int xp, int yp, Sprite player, int flip){
 		xp -= xOffset;
 		yp -= yOffset;
 		int tileSpriteSize = player.getSIZE(); 
 		for(int y=0; y<tileSpriteSize; y++){
 			int ya =  y + yp;
+			int ys = y;
+			if(flip == 2 || flip == 3) { ys = (tileSpriteSize-1) - y; }
 			for(int x=0; x<tileSpriteSize; x++){
 				int xa = x + xp;
+				int xs = x;
+				if(flip == 1 || flip == 3) { xs = (tileSpriteSize-1) - x; }
 				if(xa < - player.getSIZE() || xa >= width || ya < 0 || ya >= height) break;
 				if(xa < 0) xa = 0;
-				pixels[xa + ya * width] = player.getPixels()[x + y * player.getSIZE()];
+				int col = player.getPixels()[xs + ys * player.getSIZE()];
+				if(col != 0xffff00ff) pixels[xa + ya * width] = col;
 			}
 		}
 	}
