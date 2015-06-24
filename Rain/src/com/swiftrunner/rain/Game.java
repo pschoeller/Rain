@@ -9,11 +9,11 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
-import com.swiftrunner.rain.input.Keyboard;
-import com.swiftrunner.rain.level.Level;
-import com.swiftrunner.rain.level.RandomLevel;
 import com.swiftrunner.rain.entity.mob.Player;
 import com.swiftrunner.rain.graphics.Screen;
+import com.swiftrunner.rain.input.Keyboard;
+import com.swiftrunner.rain.level.Level;
+import com.swiftrunner.rain.level.SpawnLevel;
 
 
 public class Game extends Canvas implements Runnable {
@@ -44,7 +44,7 @@ public class Game extends Canvas implements Runnable {
 		screen = new Screen(width, height);
 		frame = new JFrame();
 		key = new Keyboard();
-		level = new RandomLevel(64, 64);
+		level = new SpawnLevel("/levels/level.png");
 		player = new Player(key);
 		
 		addKeyListener(key);

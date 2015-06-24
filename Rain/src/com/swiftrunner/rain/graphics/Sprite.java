@@ -1,8 +1,6 @@
 package com.swiftrunner.rain.graphics;
 
 
-
-
 public class Sprite {
 	
 	private final int SIZE;
@@ -12,7 +10,16 @@ public class Sprite {
 	
 	
 	public static Sprite grass = new Sprite(16,0, 1, SpriteSheet.tiles);
-	public static Sprite voidSprite = new Sprite(16, 0x1b87e0);
+	public static Sprite flower = new Sprite(16,0, 0, SpriteSheet.tiles);
+	public static Sprite rock = new Sprite(16,1, 1, SpriteSheet.tiles);
+	public static Sprite voidSprite	= new Sprite(16, 0x1b87e0);
+	
+	public static Sprite spawn_grass = new Sprite(16, 0, 0, SpriteSheet.spawn_level);
+	public static Sprite spawn_hedge = new Sprite(16, 1, 0, SpriteSheet.spawn_level);
+	public static Sprite spawn_water = new Sprite(16, 2, 0, SpriteSheet.spawn_level);
+	public static Sprite spawn_wall1 = new Sprite(16, 0, 1, SpriteSheet.spawn_level);
+	public static Sprite spawn_wall2 = new Sprite(16, 0, 2, SpriteSheet.spawn_level);
+	public static Sprite spawn_floor = new Sprite(16, 1, 1, SpriteSheet.spawn_level);
 	
 	public static Sprite player_forward_1 = new Sprite(32, 0, 0, SpriteSheet.player);
 	public static Sprite player_forward_2 = new Sprite(32, 0, 1, SpriteSheet.player);
@@ -23,9 +30,7 @@ public class Sprite {
 	public static Sprite player_back_1 = new Sprite(32, 2, 0, SpriteSheet.player);
 	public static Sprite player_back_2 = new Sprite(32, 2, 1, SpriteSheet.player);
 	public static Sprite player_back_3 = new Sprite(32, 2, 2, SpriteSheet.player);
-	//public static Sprite player_side_1 = new Sprite(32, 3, 0, SpriteSheet.player);
-	//public static Sprite player_side_2 = new Sprite(32, 3, 1, SpriteSheet.player);
-	//public static Sprite player_side_3 = new Sprite(32, 3, 2, SpriteSheet.player);
+
 	
 	
 	public Sprite(int size, int x, int y, SpriteSheet sheet){
