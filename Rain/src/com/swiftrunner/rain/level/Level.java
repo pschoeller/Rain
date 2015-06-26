@@ -1,5 +1,10 @@
 package com.swiftrunner.rain.level;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.level.tile.Tile;
 
@@ -25,9 +30,25 @@ public class Level {
 	
 	
 	protected void generateLevel(){}
-	protected void loadLevel(String path){}
 	public void update(){}
 	private void time(){}
+	
+	
+	protected void loadLevel(String path){
+		try{
+			BufferedImage image = ImageIO.read(Level.class.getResource(path));
+			int w = width = image.getWidth();
+			int h = height = image.getHeight();
+			tiles = new int[w *h];
+			image.getRGB(0, 0, w, h, tiles, 0, w);
+		}
+		catch (IOException e){
+			e.printStackTrace();
+			System.out.println("Exception! Could not load level file.");
+		}
+	}
+	
+	
 	
 	
 	public void render(int xScroll, int yScroll, Screen screen){
@@ -46,9 +67,9 @@ public class Level {
 	private Tile getTile(int x, int y){
 		if(x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
 		
-		if(tiles[x + y * width] == 0xff00ff00) return  Tile.grass;
-		if(tiles[x + y * width] == 0xffffff00) return Tile.flower;
-		if(tiles[x + y * width] == 0xff7f7f00) return Tile.rock;
+//		if(tiles[x + y * width] == 0xff00ff00) return  Tile.grass;
+//		if(tiles[x + y * width] == 0xffffff00) return Tile.flower;
+//		if(tiles[x + y * width] == 0xff7f7f00) return Tile.rock;
 		
 		if(tiles[x+y*width] == Tile.col_spawn_floor) return Tile.spawn_floor;
 		if(tiles[x+y*width] == Tile.col_spawn_grass) return Tile.spawn_grass;
