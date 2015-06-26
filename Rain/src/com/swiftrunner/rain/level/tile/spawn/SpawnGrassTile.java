@@ -1,12 +1,13 @@
-package com.swiftrunner.rain.level.tile;
+package com.swiftrunner.rain.level.tile.spawn;
 
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
+import com.swiftrunner.rain.level.tile.Tile;
 
 
-public class FlowerTile extends Tile{
+public class SpawnGrassTile extends Tile{
 	
-	public FlowerTile(Sprite sprite) {
+	public SpawnGrassTile(Sprite sprite) {
 		super(sprite);
 		
 	}

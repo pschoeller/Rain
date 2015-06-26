@@ -6,14 +6,14 @@ import com.swiftrunner.rain.level.tile.Tile;
 public class Level {
 	
 	protected int width, height;
-	protected Tile[] tiles;
+	protected int[] tiles;
 	protected int[] tilesInt;
 	
 	
 	public Level(int width, int height){
 		this.width = width;
 		this.height = height;
-		this.tiles = new Tile[width * height];
+		this.tilesInt = new int[width * height];
 		generateLevel();
 	}
 	
@@ -37,9 +37,7 @@ public class Level {
 		
 		for(int y=y0; y<y1; y++){
 			for(int x=x0; x<x1; x++){
-				//getTile(x, y).render(x, y, screen);
-				if(x < 0 || y < 0 || x >= width || y >= height) Tile.voidTile.render(x, y, screen);
-				else tiles[x + y * 16].render(x, y, screen);
+				getTile(x, y).render(x, y, screen);
 			}
 		}
 	}
@@ -47,9 +45,10 @@ public class Level {
 	
 	private Tile getTile(int x, int y){
 		if(x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
-//		if(tiles[x + y * width] == 0) return Tile.grass;
-//		if(tiles[x + y * width] == 1) return Tile.rock;
-//		if(tiles[x + y * width] == 2) return Tile.flower;
+		
+		if(tiles[x + y * width] == 0xff00ff00) return  Tile.grass;
+		if(tiles[x + y * width] == 0xffffff00) return Tile.flower;
+		if(tiles[x + y * width] == 0xff7f7f00) return Tile.rock;
 		
 		/*if(tiles[x+y*width] == Tile.col_spawn_floor) return Tile.spawn_floor;
 		if(tiles[x+y*width] == Tile.col_spawn_grass) return Tile.spawn_grass;
