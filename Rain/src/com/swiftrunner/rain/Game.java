@@ -14,6 +14,7 @@ import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.input.Keyboard;
 import com.swiftrunner.rain.level.Level;
 import com.swiftrunner.rain.level.SpawnLevel;
+import com.swiftrunner.rain.level.TileCoordinate;
 
 
 public class Game extends Canvas implements Runnable {
@@ -45,7 +46,8 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 		level = new SpawnLevel("/levels/spawn_level_map.png");
-		player = new Player(30, 30, key);
+		TileCoordinate playerSpawn = new TileCoordinate(19, 62);
+		player = new Player(playerSpawn.getX(), playerSpawn.getY(), key);
 		
 		addKeyListener(key);
 	}
