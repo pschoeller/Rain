@@ -50,16 +50,13 @@ public class Level {
 		if(tiles[x + y * width] == 0xffffff00) return Tile.flower;
 		if(tiles[x + y * width] == 0xff7f7f00) return Tile.rock;
 		
-		/*if(tiles[x+y*width] == Tile.col_spawn_floor) return Tile.spawn_floor;
+		if(tiles[x+y*width] == Tile.col_spawn_floor) return Tile.spawn_floor;
 		if(tiles[x+y*width] == Tile.col_spawn_grass) return Tile.spawn_grass;
 		if(tiles[x+y*width] == Tile.col_spawn_hedge) return Tile.spawn_hedge;
 		if(tiles[x+y*width] == Tile.col_spawn_water) return Tile.spawn_water;
 		if(tiles[x+y*width] == Tile.col_spawn_wall1) return Tile.spawn_wall1;
-		if(tiles[x+y*width] == Tile.col_spawn_wall2) return Tile.spawn_wall2;*/
+		if(tiles[x+y*width] == Tile.col_spawn_wall2) return Tile.spawn_wall2;
 		
-//		if(tiles[x+y*width] == 0xff00ff00) return Tile.grass;
-//		if(tiles[x+y*width] == 0xffffff00) return Tile.flower;
-//		if(tiles[x+y*width] == 0xff7f7f00) return Tile.rock;
 		return Tile.voidTile;
 	}
 }

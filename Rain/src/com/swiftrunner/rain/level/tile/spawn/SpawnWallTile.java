@@ -4,9 +4,9 @@ import com.swiftrunner.rain.graphics.Sprite;
 import com.swiftrunner.rain.level.tile.Tile;
 
 
-public class SpawnGrassTile extends Tile{
+public class SpawnWallTile extends Tile{
 	
-	public SpawnGrassTile(Sprite sprite) {
+	public SpawnWallTile(Sprite sprite) {
 		super(sprite);
 		
 	}
