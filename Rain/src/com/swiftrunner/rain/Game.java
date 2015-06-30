@@ -1,7 +1,9 @@
 package com.swiftrunner.rain;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -12,6 +14,7 @@ import javax.swing.JFrame;
 import com.swiftrunner.rain.entity.mob.Player;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.input.Keyboard;
+import com.swiftrunner.rain.input.Mouse;
 import com.swiftrunner.rain.level.Level;
 import com.swiftrunner.rain.level.SpawnLevel;
 import com.swiftrunner.rain.level.TileCoordinate;
@@ -51,6 +54,10 @@ public class Game extends Canvas implements Runnable {
 		player.init(level);
 		
 		addKeyListener(key);
+		
+		Mouse mouse = new Mouse();
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
 	}
 	
 	
@@ -91,6 +98,10 @@ public class Game extends Canvas implements Runnable {
 		
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Verdana", 0, 50));
+		g.fillRect(Mouse.getX()-32, Mouse.getY()-32, 64, 64);
+		if(Mouse.getB() != -1) g.drawString("Button: " + Mouse.getB(), 80, 80);
 		
 		g.dispose();
 		bs.show();
