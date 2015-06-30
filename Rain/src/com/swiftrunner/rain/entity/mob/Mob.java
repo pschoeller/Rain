@@ -1,8 +1,12 @@
 package com.swiftrunner.rain.entity.mob;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.swiftrunner.rain.entity.Entity;
+import com.swiftrunner.rain.entity.projectile.Projectile;
+import com.swiftrunner.rain.entity.projectile.WizardProjectile;
 import com.swiftrunner.rain.graphics.Sprite;
-import com.swiftrunner.rain.input.Mouse;
 
 
 public abstract class Mob extends Entity{
@@ -10,6 +14,8 @@ public abstract class Mob extends Entity{
 	protected Sprite sprite;
 	protected int dir = -1;
 	protected boolean moving = false;
+	
+	protected List<Projectile> projectiles = new ArrayList<Projectile>();
 	
 	
 	public void move(int xa, int ya){
@@ -32,8 +38,9 @@ public abstract class Mob extends Entity{
 	
 	
 	protected void shoot(int x, int y, double dir){
-		dir = Math.toDegrees(dir);
-		System.out.println("Mouse X: " + Mouse.getX() + ", Mouse Y: " + Mouse.getY() + ", Angle: " + dir);
+		Projectile p = new WizardProjectile(x, y, dir);
+		projectiles.add(p);
+		level.add(p);
 	}
 	
 	

@@ -2,9 +2,12 @@ package com.swiftrunner.rain.level;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import com.swiftrunner.rain.entity.Entity;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.level.tile.Tile;
 
@@ -13,6 +16,8 @@ public class Level {
 	protected int width, height;
 	protected int[] tiles;
 	protected int[] tilesInt;
+	
+	private List<Entity> entities = new ArrayList<Entity>();
 	
 	
 	public Level(int width, int height){
@@ -30,8 +35,14 @@ public class Level {
 	
 	
 	protected void generateLevel(){}
-	public void update(){}
 	private void time(){}
+	
+	
+	public void update(){
+		for(int i=0; i<entities.size(); i++){
+			entities.get(i).update();
+		}
+	}
 	
 	
 	protected void loadLevel(String path){
@@ -61,6 +72,10 @@ public class Level {
 				getTile(x, y).render(x, y, screen);
 			}
 		}
+		
+		for(int i=0; i<entities.size(); i++){
+			entities.get(i).render(screen);
+		}
 	}
 	
 	
@@ -79,5 +94,10 @@ public class Level {
 		if(tiles[x+y*width] == Tile.col_spawn_wall2) return Tile.spawn_wall2;
 		
 		return Tile.voidTile;
+	}
+	
+	
+	public void add(Entity e){
+		entities.add(e);
 	}
 }
