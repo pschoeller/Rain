@@ -3,6 +3,7 @@ package com.swiftrunner.rain.entity.mob;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
 import com.swiftrunner.rain.input.Keyboard;
+import com.swiftrunner.rain.input.Mouse;
 
 
 
@@ -50,9 +51,21 @@ public class Player extends Mob{
 		else{
 			walking = false;
 		}
+		
+		updateShooting();
 	}
 	
 	
+	private void updateShooting() {		
+		if(Mouse.getB() == 1){
+			double dx = Mouse.getX() - 300/2;
+			double dy = Mouse.getY() - 168/2;
+			double dir = Math.atan2(dy, dx);
+			shoot(x, y, dir);
+		}
+	}
+
+
 	public void render(Screen screen){
 		if(dir == 0) {
 			sprite = Sprite.player_forward_1;

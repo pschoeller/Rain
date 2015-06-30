@@ -87,8 +87,10 @@ public class Game extends Canvas implements Runnable {
 		
 		screen.clear();
 		
-		int xScroll = (player.getX() - screen.getWidth()/2) + (player.getSprite().getSIZE()/2);
-		int yScroll = (player.getY() - screen.getHeight()/2) + (player.getSprite().getSIZE()/2);
+		
+		int spriteVar = player.getSprite().getSIZE()/2;
+		int xScroll = (player.getX() - screen.getWidth()/2) + (spriteVar);
+		int yScroll = (player.getY() - screen.getHeight()/2) + (spriteVar);
 		level.render(xScroll, yScroll, screen);
 		player.render(screen);
 		
@@ -100,8 +102,8 @@ public class Game extends Canvas implements Runnable {
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Verdana", 0, 50));
-		g.fillRect(Mouse.getX()-32, Mouse.getY()-32, 64, 64);
-		if(Mouse.getB() != -1) g.drawString("Button: " + Mouse.getB(), 80, 80);
+		//g.fillRect(Mouse.getX()-32, Mouse.getY()-32, 64, 64);
+		//if(Mouse.getB() != -1) g.drawString("Button: " + Mouse.getB(), 80, 80);
 		
 		g.dispose();
 		bs.show();
