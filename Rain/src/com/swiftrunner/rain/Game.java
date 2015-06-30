@@ -23,10 +23,10 @@ import com.swiftrunner.rain.level.TileCoordinate;
 public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-	public static int width = 300;
-	public static int height = width/16*9;
-	public static int scale = 3;
-	public static String title = "Rain";
+	private static int width = 300;
+	private static int height = width/16*9;
+	private static int scale = 3;
+	private static String title = "Rain";
 	
 	private Thread thread;
 	private JFrame frame;
@@ -59,6 +59,10 @@ public class Game extends Canvas implements Runnable {
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
 	}
+	
+	
+	public static int getWindowWidth() { return width * scale; }
+	public static int getWindowHeight() { return height * scale; }
 	
 	
 	public synchronized void start(){

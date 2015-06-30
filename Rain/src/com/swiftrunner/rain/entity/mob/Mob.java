@@ -2,6 +2,7 @@ package com.swiftrunner.rain.entity.mob;
 
 import com.swiftrunner.rain.entity.Entity;
 import com.swiftrunner.rain.graphics.Sprite;
+import com.swiftrunner.rain.input.Mouse;
 
 
 public abstract class Mob extends Entity{
@@ -31,7 +32,8 @@ public abstract class Mob extends Entity{
 	
 	
 	protected void shoot(int x, int y, double dir){
-		System.out.println("Angle: " + dir);
+		dir = Math.toDegrees(dir);
+		System.out.println("Mouse X: " + Mouse.getX() + ", Mouse Y: " + Mouse.getY() + ", Angle: " + dir);
 	}
 	
 	
