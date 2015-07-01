@@ -14,7 +14,8 @@ public abstract class Projectile extends Entity {
 	protected double x, y;
 	protected static Sprite sprite;
 	protected double nx, ny;
-	protected double speed, rateOfFire, range, damage;
+	protected static int rateOfFire;
+	protected static double speed, range, damage;
 	
 	protected final Random random = new Random();
 	
@@ -34,4 +35,6 @@ public abstract class Projectile extends Entity {
 	public void render(Screen screen){
 		screen.renderSprite((int)x, (int)y, sprite);
 	}
+	
+	public static int getRateOfFire() { return rateOfFire; }
 }

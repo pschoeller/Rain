@@ -1,10 +1,6 @@
 package com.swiftrunner.rain.entity.mob;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.swiftrunner.rain.entity.Entity;
-import com.swiftrunner.rain.entity.projectile.Projectile;
 import com.swiftrunner.rain.entity.projectile.WizardProjectile;
 import com.swiftrunner.rain.graphics.Sprite;
 
@@ -35,8 +31,7 @@ public abstract class Mob extends Entity{
 	
 	
 	protected void shoot(int x, int y, double dir){
-		Projectile p = new WizardProjectile(x, y, dir);
-		level.addProjectile(p);
+		level.addProjectile(new WizardProjectile(x, y, dir));
 	}
 	
 	

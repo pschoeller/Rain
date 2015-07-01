@@ -1,6 +1,7 @@
 package com.swiftrunner.rain.entity.mob;
 
 import com.swiftrunner.rain.Game;
+import com.swiftrunner.rain.entity.projectile.WizardProjectile;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
 import com.swiftrunner.rain.input.Keyboard;
@@ -16,6 +17,8 @@ public class Player extends Mob{
 	private int flip = 0;
 	private boolean walking = false;
 	
+	private int fireRate = 0;
+	
 	
 	public Player(Keyboard input){
 		this.input = input;
@@ -28,6 +31,7 @@ public class Player extends Mob{
 		this.y = y;
 		this.input = input;
 		sprite = Sprite.player_back_1;
+		fireRate = WizardProjectile.getRateOfFire();
 	}
 	
 	
@@ -35,7 +39,8 @@ public class Player extends Mob{
 	
 	
 	public void update(){
-		System.out.println(level.getProjectiles().size());
+		if(fireRate > 0) { fireRate--; }
+		
 		int xa=0, ya=0;
 		
 		if(anim<7500) anim++;
@@ -67,11 +72,12 @@ public class Player extends Mob{
 
 
 	private void updateShooting() {		
-		if(Mouse.getB() == 1){
+		if(Mouse.getB() == 1 && fireRate <= 0){
 			double dx = Mouse.getX() - Game.getWindowWidth()/2;
 			double dy = Mouse.getY() - Game.getWindowHeight()/2;
 			double dir = Math.atan2(dy, dx);
 			shoot(x, y, dir);
+			fireRate = WizardProjectile.getRateOfFire();
 		}
 	}
 

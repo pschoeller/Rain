@@ -9,7 +9,7 @@ public class WizardProjectile extends Projectile{
 		range = random.nextInt(100) + 150;
 		speed = 5;
 		damage = 20;
-		rateOfFire = 15;
+		rateOfFire = 8;
 		sprite = Sprite.wizard_projectile;
 		
 		nx = speed * Math.cos(angle);
