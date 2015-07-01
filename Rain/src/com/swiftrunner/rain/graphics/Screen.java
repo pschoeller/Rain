@@ -47,23 +47,7 @@ public class Screen {
 	}
 	
 	
-	public void renderTile(int xp, int yp, Tile tile){
-		xp -= xOffset;
-		yp -= yOffset;
-		int tileSpriteSize = tile.getSprite().getSIZE(); 
-		for(int y=0; y<tileSpriteSize; y++){
-			int ya =  y + yp;
-			for(int x=0; x<tileSpriteSize; x++){
-				int xa = x + xp;
-				if(xa < -tile.getSprite().getSIZE() || xa >= width || ya < 0 || ya >= height) break;
-				if(xa < 0) xa = 0;
-				pixels[xa + ya * width] = tile.getSprite().getPixels()[x + y * tile.getSprite().getSIZE()];
-			}
-		}
-	}
-	
-	
-	public void renderTile(int xp, int yp, Sprite sprite){
+	public void renderSprite(int xp, int yp, Sprite sprite){
 		xp -= xOffset;
 		yp -= yOffset;
 		int tileSpriteSize = sprite.getSIZE(); 
@@ -73,7 +57,8 @@ public class Screen {
 				int xa = x + xp;
 				if(xa < -sprite.getSIZE() || xa >= width || ya < 0 || ya >= height) break;
 				if(xa < 0) xa = 0;
-				pixels[xa + ya * width] = sprite.getPixels()[x + y * sprite.getSIZE()];
+				int color = sprite.getPixels()[x + y * sprite.getSIZE()];
+				if(color != 0xffff00ff) pixels[xa + ya * width] = color;
 			}
 		}
 	}

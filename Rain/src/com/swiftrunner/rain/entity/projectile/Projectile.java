@@ -1,13 +1,16 @@
 package com.swiftrunner.rain.entity.projectile;
 
 import com.swiftrunner.rain.entity.Entity;
+import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
 
 public abstract class Projectile extends Entity {
 	
 	protected final int xOrigin, yOrigin;
+	protected int distance;
 	protected double angle;
-	protected Sprite sprite;
+	protected double x, y;
+	protected static Sprite sprite;
 	protected double nx, ny;
 	protected double speed, rateOfFire, range, damage;
 	
@@ -22,5 +25,10 @@ public abstract class Projectile extends Entity {
 	
 	protected void move(){
 		
+	}
+	
+	
+	public void render(Screen screen){
+		screen.renderSprite((int)x, (int)y, sprite);
 	}
 }

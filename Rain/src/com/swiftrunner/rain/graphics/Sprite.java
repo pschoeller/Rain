@@ -31,6 +31,8 @@ public class Sprite {
 	public static Sprite player_back_1 = new Sprite(32, 2, 0, SpriteSheet.player);
 	public static Sprite player_back_2 = new Sprite(32, 2, 1, SpriteSheet.player);
 	public static Sprite player_back_3 = new Sprite(32, 2, 2, SpriteSheet.player);
+	
+	public static Sprite wizard_projectile = new Sprite(16, 0, 0, SpriteSheet.projectile_wizard);
 
 	
 	

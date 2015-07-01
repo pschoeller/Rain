@@ -19,6 +19,7 @@ public abstract class Mob extends Entity{
 	
 	
 	public void move(int xa, int ya){
+		System.out.println(projectiles.size());
 		if(xa != 0 && ya != 0){
 			move(xa, 0);
 			move(0, ya);
@@ -55,6 +56,6 @@ public abstract class Mob extends Entity{
 	}
 	
 	
-	public void update(){}
-	public void render(){}
+	public void update() {}
+	public void render() {}
 }
