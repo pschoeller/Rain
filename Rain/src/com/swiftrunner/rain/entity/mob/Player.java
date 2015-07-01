@@ -35,6 +35,7 @@ public class Player extends Mob{
 	
 	
 	public void update(){
+		System.out.println(level.getProjectiles().size());
 		int xa=0, ya=0;
 		
 		if(anim<7500) anim++;
@@ -59,8 +60,8 @@ public class Player extends Mob{
 	
 	
 	private void clear() {
-		for(int i=0; i<projectiles.size(); i++){
-			if(projectiles.get(i).isRemoved()){ projectiles.remove(i); }
+		for(int i=0; i<level.getProjectiles().size(); i++){
+			if(level.getProjectiles().get(i).isRemoved()){ level.getProjectiles().remove(i); }
 		}
 	}
 

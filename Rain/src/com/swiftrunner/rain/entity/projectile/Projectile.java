@@ -1,5 +1,7 @@
 package com.swiftrunner.rain.entity.projectile;
 
+import java.util.Random;
+
 import com.swiftrunner.rain.entity.Entity;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
@@ -14,6 +16,8 @@ public abstract class Projectile extends Entity {
 	protected double nx, ny;
 	protected double speed, rateOfFire, range, damage;
 	
+	protected final Random random = new Random();
+	
 	public Projectile(int x, int y, double dir) {
 		xOrigin = x;
 		yOrigin = y;
@@ -23,9 +27,8 @@ public abstract class Projectile extends Entity {
 	}
 	
 	
-	protected void move(){
-		
-	}
+	
+	protected void move() {}
 	
 	
 	public void render(Screen screen){
