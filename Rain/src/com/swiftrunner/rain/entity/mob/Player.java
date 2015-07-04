@@ -16,7 +16,6 @@ public class Player extends Mob{
 	private int anim = 0;
 	private int flip = 0;
 	private boolean walking = false;
-	
 	private int fireRate = 0;
 	
 	
