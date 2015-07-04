@@ -33,7 +33,7 @@ public abstract class Projectile extends Entity {
 	
 	
 	public void render(Screen screen){
-		screen.renderSprite((int)x, (int)y, sprite);
+		screen.renderSprite((int)x, (int)y, sprite, true);
 	}
 	
 	public static int getRateOfFire() { return rateOfFire; }
