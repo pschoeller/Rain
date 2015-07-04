@@ -47,7 +47,7 @@ public class Screen {
 	}
 	
 	
-	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed){
+	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed, int flip){
 		if(fixed){
 			xp -= xOffset;
 			yp -= yOffset;
@@ -57,33 +57,16 @@ public class Screen {
 		int spriteWidth = sprite.getWidth(); 
 		for(int y=0; y<spriteHeight; y++){
 			int ya =  y + yp;
+			int ys = y;
+			if(flip == 2 || flip == 3) { ys = (spriteHeight - 1) - y; }
 			for(int x=0; x<spriteWidth; x++){
 				int xa = x + xp;
+				int xs = x;
+				if(flip == 1 || flip == 3) { xs = (spriteWidth - 1) - x; }
 				if(xa < -spriteWidth || xa >= width || ya < 0 || ya >= height) continue;
 				if(xa < 0) xa = 0;
-				int color = sprite.getPixels()[x + y * spriteWidth];
+				int color = sprite.getPixels()[xs + ys * spriteWidth];
 				if(color != 0xffff00ff) pixels[xa + ya * width] = color;
-			}
-		}
-	}
-	
-	
-	public void renderPlayer(int xp, int yp, Sprite player, int flip){
-		xp -= xOffset;
-		yp -= yOffset;
-		int tileSpriteSize = player.getSIZE(); 
-		for(int y=0; y<tileSpriteSize; y++){
-			int ya =  y + yp;
-			int ys = y;
-			if(flip == 2 || flip == 3) { ys = (tileSpriteSize-1) - y; }
-			for(int x=0; x<tileSpriteSize; x++){
-				int xa = x + xp;
-				int xs = x;
-				if(flip == 1 || flip == 3) { xs = (tileSpriteSize-1) - x; }
-				if(xa < - player.getSIZE() || xa >= width || ya < 0 || ya >= height) break;
-				if(xa < 0) xa = 0;
-				int col = player.getPixels()[xs + ys * player.getSIZE()];
-				if(col != 0xffff00ff) pixels[xa + ya * width] = col;
 			}
 		}
 	}
