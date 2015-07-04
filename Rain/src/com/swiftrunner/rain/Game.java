@@ -28,6 +28,8 @@ public class Game extends Canvas implements Runnable {
 	private static int width = 300;
 	private static int height = width/16*9;
 	private static int scale = 3;
+	private static int swidth = width * scale;
+	private static int sheight = height * scale;
 	private static String title = "Rain";
 	
 	private Thread thread;
@@ -44,7 +46,7 @@ public class Game extends Canvas implements Runnable {
 	
 	
 	public Game(){
-		Dimension size = new Dimension(width*scale, height*scale);
+		Dimension size = new Dimension(swidth, sheight);
 		setPreferredSize(size);
 		
 		screen = new Screen(width, height);
@@ -63,8 +65,8 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	
-	public static int getWindowWidth() { return width * scale; }
-	public static int getWindowHeight() { return height * scale; }
+	public static int getWindowWidth() { return swidth; }
+	public static int getWindowHeight() { return sheight; }
 	
 	
 	public synchronized void start(){
