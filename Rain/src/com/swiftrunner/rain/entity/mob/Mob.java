@@ -1,6 +1,7 @@
 package com.swiftrunner.rain.entity.mob;
 
 import com.swiftrunner.rain.entity.Entity;
+import com.swiftrunner.rain.entity.particle.Particle;
 import com.swiftrunner.rain.entity.projectile.WizardProjectile;
 import com.swiftrunner.rain.graphics.Sprite;
 

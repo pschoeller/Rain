@@ -1,5 +1,6 @@
 package com.swiftrunner.rain.entity.projectile;
 
+import com.swiftrunner.rain.entity.particle.Particle;
 import com.swiftrunner.rain.graphics.Sprite;
 
 public class WizardProjectile extends Projectile{
@@ -18,7 +19,11 @@ public class WizardProjectile extends Projectile{
 	
 	
 	public void update(){
-		if(level.tileCollision(x, y, nx, ny, sprite.getSIZE())) { remove(); } 
+		if(level.tileCollision(x, y, nx, ny, sprite.getSIZE())) { 
+			remove(); 
+			Particle p = new Particle((int)x, (int)y, 50, 500);
+			level.addEntity(p);
+		} 
 		move();
 	}
 	
