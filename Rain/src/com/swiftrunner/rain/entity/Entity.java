@@ -8,8 +8,9 @@ import com.swiftrunner.rain.level.Level;
 
 public abstract class Entity {
 	
-	protected int x, y;
 	private boolean removed=false;
+	
+	protected int x, y;
 	protected Level level;
 	protected final Random random = new Random();
 	

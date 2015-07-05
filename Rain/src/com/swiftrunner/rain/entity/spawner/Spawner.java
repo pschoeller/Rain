@@ -1,5 +1,6 @@
-package com.swiftrunner.rain.entity;
+package com.swiftrunner.rain.entity.spawner;
 
+import com.swiftrunner.rain.entity.Entity;
 import com.swiftrunner.rain.entity.particle.Particle;
 import com.swiftrunner.rain.level.Level;
 
@@ -17,11 +18,5 @@ public class Spawner extends Entity{
 		this.x = x;
 		this.y = y;
 		this.type = type;
-		
-		for(int i=0; i<amount; i++){
-			if(type == Type.PARTICLE){
-				level.add(new Particle(x, y, 50));
-			}
-		}
 	}
 }

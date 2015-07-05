@@ -8,7 +8,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import com.swiftrunner.rain.entity.Entity;
-import com.swiftrunner.rain.entity.Spawner;
 import com.swiftrunner.rain.entity.particle.Particle;
 import com.swiftrunner.rain.entity.projectile.Projectile;
 import com.swiftrunner.rain.graphics.Screen;
@@ -36,7 +35,6 @@ public class Level {
 	public Level(String path){
 		loadLevel(path);
 		generateLevel();
-		add(new Spawner(16*16, 62*16, Spawner.Type.PARTICLE, 2, this));
 	}
 	
 	
@@ -67,6 +65,29 @@ public class Level {
 		for(int i=0; i<particles.size(); i++){
 			particles.get(i).update();
 		}
+		
+		remove();
+	}
+	
+	
+	private void remove(){
+		for(int i=0; i<entities.size(); i++){
+			if(entities.get(i).isRemoved()){
+				entities.remove(i);
+			}
+		}
+		
+		for(int i=0; i<projectiles.size(); i++){
+			if(projectiles.get(i).isRemoved()){
+				projectiles.remove(i);
+			}
+		}
+		
+		for(int i=0; i<particles.size(); i++){
+			if(particles.get(i).isRemoved()){
+				particles.remove(i);
+			}
+		}		
 	}
 	
 	
