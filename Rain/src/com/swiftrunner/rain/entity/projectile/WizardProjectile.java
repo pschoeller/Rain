@@ -21,8 +21,8 @@ public class WizardProjectile extends Projectile{
 	public void update(){
 		if(level.tileCollision(x, y, nx, ny, sprite.getSIZE())) { 
 			remove(); 
-			Particle p = new Particle((int)x, (int)y, 50, 500);
-			level.addEntity(p);
+			Particle p = new Particle((int)x, (int)y, 50);
+			level.add(p);
 		} 
 		move();
 	}

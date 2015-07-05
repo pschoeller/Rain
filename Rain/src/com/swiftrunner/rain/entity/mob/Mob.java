@@ -32,7 +32,7 @@ public abstract class Mob extends Entity{
 	
 	
 	protected void shoot(int x, int y, double dir){
-		level.addProjectile(new WizardProjectile(x, y, dir));
+		level.add(new WizardProjectile(x, y, dir));
 	}
 	
 	
