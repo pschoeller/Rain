@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import com.swiftrunner.rain.entity.mob.Player;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
+import com.swiftrunner.rain.graphics.SpriteSheet;
 import com.swiftrunner.rain.input.Keyboard;
 import com.swiftrunner.rain.input.Mouse;
 import com.swiftrunner.rain.level.Level;
@@ -101,6 +102,7 @@ public class Game extends Canvas implements Runnable {
 		int yScroll = (player.getY() - screen.getHeight()/2) + (spriteVar);
 		level.render(xScroll, yScroll, screen);
 		player.render(screen);
+		screen.renderSheet(40, 40, SpriteSheet.player_down, false, 0);
 		
 		for(int i=0; i<pixels.length; i++){
 			pixels[i] = screen.getPixels()[i];

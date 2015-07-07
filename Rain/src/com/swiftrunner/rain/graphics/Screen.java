@@ -70,4 +70,29 @@ public class Screen {
 			}
 		}
 	}
+	
+	
+	public void renderSheet(int xp, int yp, SpriteSheet sheet, boolean fixed, int flip){
+		if(fixed){
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+		
+		int spriteHeight = sheet.getHEIGHT(); 
+		int spriteWidth = sheet.getWIDTH(); 
+		for(int y=0; y<spriteHeight; y++){
+			int ya =  y + yp;
+			int ys = y;
+			if(flip == 2 || flip == 3) { ys = (spriteHeight - 1) - y; }
+			for(int x=0; x<spriteWidth; x++){
+				int xa = x + xp;
+				int xs = x;
+				if(flip == 1 || flip == 3) { xs = (spriteWidth - 1) - x; }
+				if(xa < -spriteWidth || xa >= width || ya < 0 || ya >= height) continue;
+				if(xa < 0) xa = 0;
+				int color = sheet.getPixels()[xs + ys * spriteWidth];
+				if(color != 0xffff00ff) pixels[xa + ya * width] = color;
+			}
+		}
+	}
 }

@@ -63,7 +63,7 @@ public class Sprite {
 	public Sprite(int width, int height, int color){
 		this.width = width;
 		this.height = height;
-		SIZE = width * height;
+		SIZE = -1;
 		pixels = new int[width*height];
 		setColor(color);
 	}
