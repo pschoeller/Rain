@@ -11,6 +11,7 @@ public class SpriteSheet {
 	private final int SIZE;
 	private final int WIDTH, HEIGHT;
 	private int[] pixels;
+	private Sprite[] sprites;
 	
 	public static SpriteSheet tiles = new SpriteSheet("/textures/spritesheets/spritesheet.png", 256);
 	public static SpriteSheet player = new SpriteSheet("/textures/spritesheets/King_Cherno.png", 128);
@@ -36,6 +37,21 @@ public class SpriteSheet {
 			for(int x0 = 0; x0 < w; x0++){
 				int xp = xx + x0;
 				pixels[x0 + y0 * w] = sheet.pixels[xp + yp * sheet.WIDTH];
+			}
+		}
+		
+		int frame = 0;
+		sprites = new Sprite[width * height];
+		for(int ya = 0; ya < height; ya++){
+			for(int xa = 0; xa < width; xa++){
+				int[] spritePixels = new int[spriteSize * spriteSize];
+				for(int y0 = 0; y0 < spriteSize; y0++){
+					for(int x0 = 0; x0 < spriteSize; x0++){
+						spritePixels[x0 + y0 * spriteSize] = pixels[(x0 + xa * spriteSize) + (y0 + ya * spriteSize) * WIDTH];
+					}
+				}
+				Sprite sprite = new Sprite(spritePixels, spriteSize, spriteSize);
+				sprites[frame++] = sprite;
 			}
 		}
 	}
@@ -65,6 +81,11 @@ public class SpriteSheet {
 	public int getWIDTH() { return WIDTH; }
 	public int getHEIGHT() { return HEIGHT; }
 	public int[] getPixels() { return pixels; }
+	
+	
+	public Sprite[] getSprites(){
+		return sprites;
+	}
 	
 	
 	private void load(){

@@ -8,13 +8,11 @@ import com.swiftrunner.rain.level.tile.Tile;
 public class Screen {
 	
 	private int width, height;
-	private int[] pixels;
-	
+	private int[] pixels;	
 	private final int MAP_SIZE = 64;
 	private final int MAP_SIZE_MASK = MAP_SIZE - 1;
 	private int[] tiles = new int[MAP_SIZE * MAP_SIZE];
 	private int xOffset, yOffset;
-	
 	private Random random = new Random();
 	
 	

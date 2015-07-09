@@ -2,8 +2,10 @@ package com.swiftrunner.rain.entity.mob;
 
 import com.swiftrunner.rain.Game;
 import com.swiftrunner.rain.entity.projectile.WizardProjectile;
+import com.swiftrunner.rain.graphics.AnimatedSprite;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
+import com.swiftrunner.rain.graphics.SpriteSheet;
 import com.swiftrunner.rain.input.Keyboard;
 import com.swiftrunner.rain.input.Mouse;
 
@@ -17,6 +19,7 @@ public class Player extends Mob{
 	private int flip = 0;
 	private boolean walking = false;
 	private int fireRate = 0;
+	private AnimatedSprite test = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
 	
 	
 	public Player(Keyboard input){
@@ -38,6 +41,7 @@ public class Player extends Mob{
 	
 	
 	public void update(){
+		test.update();
 		if(fireRate > 0) { fireRate--; }
 		
 		int xa=0, ya=0;
@@ -115,7 +119,7 @@ public class Player extends Mob{
 				else { sprite = Sprite.player_side_3; }
 			}
 		}
-		
+		sprite = test.getSprite();
 		screen.renderSprite(x, y, sprite, true, flip);	
 	}
 }

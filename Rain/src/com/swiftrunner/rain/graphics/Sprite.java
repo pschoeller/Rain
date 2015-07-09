@@ -8,7 +8,8 @@ public class Sprite {
 	private int width, height;
 	private int a, b, c, d;
 	private int[] pixels;
-	private SpriteSheet sheet;
+	
+	protected SpriteSheet sheet;
 	
 	
 	public static Sprite grass = new Sprite(16,0, 1, SpriteSheet.tiles);
@@ -36,7 +37,22 @@ public class Sprite {
 	public static Sprite wizard_projectile = new Sprite(16, 0, 0, SpriteSheet.projectile_wizard);
 	
 	public static Sprite particle_normal = new Sprite(3, 0xffaaaaaa);
-
+	
+	
+	protected Sprite(int[] pixels, int width, int height){
+		this.SIZE = (width == height) ? width : -1;
+		this.width = width;
+		this.height = height;
+		this.pixels = pixels;
+	}
+	
+	
+	protected Sprite(SpriteSheet sheet, int width, int height){
+		this.SIZE = (width == height) ? width : -1;
+		this.width = width;
+		this.height = height;
+		this.sheet = sheet;
+	}
 	
 	
 	public Sprite(int size, int x, int y, SpriteSheet sheet){
