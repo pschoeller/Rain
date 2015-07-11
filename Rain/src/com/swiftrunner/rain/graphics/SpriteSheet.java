@@ -14,12 +14,15 @@ public class SpriteSheet {
 	private Sprite[] sprites;
 	
 	public static SpriteSheet tiles = new SpriteSheet("/textures/spritesheets/spritesheet.png", 256);
-	public static SpriteSheet player = new SpriteSheet("/textures/spritesheets/King_Cherno.png", 128);
 	public static SpriteSheet spawn_level = new SpriteSheet("/textures/spritesheets/spawn-level.png", 48);
 	public static SpriteSheet projectile_wizard = new SpriteSheet("/textures/spritesheets/projectiles/wizard_projectiles.png", 48);
 	
-	//public static SpriteSheet player = new SpriteSheet("/textures/spritesheets/Sprite_female_template.png", 256, 256);
-	public static SpriteSheet player_down = new SpriteSheet(player, 0, 0, 1, 3, 32);
+//	public static SpriteSheet player = new SpriteSheet("/textures/spritesheets/Sprite_female_template.png", 256, 256);
+	public static SpriteSheet player = new SpriteSheet("/textures/spritesheets/King_Cherno.png", 128);
+	public static SpriteSheet player_up = new SpriteSheet(player, 0, 0, 1, 3, 32);
+	public static SpriteSheet player_down = new SpriteSheet(player, 2, 0, 1, 3, 32);
+	public static SpriteSheet player_left = new SpriteSheet(player, 3, 0, 1, 3, 32);
+	public static SpriteSheet player_right = new SpriteSheet(player, 1, 0, 1, 3, 32);
 	
 	
 	public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize){

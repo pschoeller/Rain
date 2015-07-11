@@ -33,4 +33,13 @@ public class AnimatedSprite extends Sprite{
 	public void setFrameRate(int frames){
 		this.rate = frames;
 	}
+
+
+	public void setFrame(int index) {
+		if (index > sheet.getSprites().length - 1){
+			System.err.println("Error! Index exceeds size in " + this);
+			return;
+		}
+		sprite = sheet.getSprites()[index];
+	}
 }
