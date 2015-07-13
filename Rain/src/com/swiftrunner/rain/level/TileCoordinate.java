@@ -3,12 +3,13 @@ package com.swiftrunner.rain.level;
 public class TileCoordinate {
 	
 	private int x, y;
-	private final int TILE_SIZE = 16;
+	private final int TILE_WIDTH = 16;
+	private final int TILE_HEIGHT = 16;
 	
 	
 	public TileCoordinate(int x, int y){
-		this.x = x * TILE_SIZE;
-		this.y = y * TILE_SIZE;
+		this.x = x * TILE_WIDTH;
+		this.y = y * TILE_HEIGHT;
 	}
 	
 	

@@ -16,7 +16,7 @@ public abstract class Entity {
 	
 	
 	public void update(){}
-	public void render() {}
+	public void render(){}
 	public void render(Screen screen){}
 	public void remove(){ removed = true; }
 	public boolean isRemoved(){ return removed; }

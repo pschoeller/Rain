@@ -1,8 +1,8 @@
 package com.swiftrunner.rain.entity.mob;
 
 import com.swiftrunner.rain.entity.Entity;
-import com.swiftrunner.rain.entity.particle.Particle;
 import com.swiftrunner.rain.entity.projectile.WizardProjectile;
+import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
 
 
@@ -47,6 +47,6 @@ public abstract class Mob extends Entity{
 	}
 	
 	
-	public void update() {}
-	public void render() {}
+	public abstract void update();
+	public abstract void render(Screen screen);
 }

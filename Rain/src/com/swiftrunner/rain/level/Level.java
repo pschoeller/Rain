@@ -8,6 +8,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import com.swiftrunner.rain.entity.Entity;
+import com.swiftrunner.rain.entity.mob.Dummy;
 import com.swiftrunner.rain.entity.particle.Particle;
 import com.swiftrunner.rain.entity.projectile.Projectile;
 import com.swiftrunner.rain.graphics.Screen;
@@ -103,6 +104,9 @@ public class Level {
 			e.printStackTrace();
 			System.out.println("Exception! Could not load level file.");
 		}
+		
+		TileCoordinate newSpawn = new TileCoordinate(22, 62);
+		add(new Dummy(newSpawn.getX(), newSpawn.getY()));
 	}
 	
 	
