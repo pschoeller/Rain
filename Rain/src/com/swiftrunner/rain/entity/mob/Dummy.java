@@ -25,7 +25,7 @@ public class Dummy extends Mob{
 	public void update(){		
 		int xa = 0;
 		int ya = 0;
-		ya++;
+		ya--;
 		if (walking) animSprite.update();
 		else animSprite.setFrame(0);
 		
@@ -41,6 +41,8 @@ public class Dummy extends Mob{
 		else{
 			walking = false;
 		}
+		
+		sprite = animSprite.getSprite();
 	}
 	
 	
