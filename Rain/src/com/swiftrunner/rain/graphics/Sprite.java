@@ -38,6 +38,8 @@ public class Sprite {
 	
 	public static Sprite particle_normal = new Sprite(3, 0xffaaaaaa);
 	
+	public static Sprite dummy = new Sprite(32, 0, 0, SpriteSheet.dummy_down);
+	
 	
 	protected Sprite(int[] pixels, int width, int height){
 		this.SIZE = (width == height) ? width : -1;
@@ -103,7 +105,7 @@ public class Sprite {
 	private void load(){
 		for(int y=0; y<height; y++){
 			for (int x=0; x<width; x++){
-				pixels[x+y*SIZE] = sheet.getPixels()[(x + this.x) + (y + this.y) * sheet.getSIZE()];
+				pixels[x+y*width] = sheet.getPixels()[(x + this.x) + (y + this.y) * sheet.getWIDTH()];
 			}
 		}
 	}

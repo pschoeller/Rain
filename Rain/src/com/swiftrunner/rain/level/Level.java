@@ -110,8 +110,6 @@ public class Level {
 	}
 	
 	
-	
-	
 	public void render(int xScroll, int yScroll, Screen screen){
 		screen.setOffset(xScroll, yScroll);
 		int x0=xScroll>>4; int x1=(xScroll+screen.getWidth()+16)>>4;

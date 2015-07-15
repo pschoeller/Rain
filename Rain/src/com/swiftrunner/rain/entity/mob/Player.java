@@ -17,7 +17,6 @@ public class Player extends Mob{
 	private Sprite sprite;
 	private int anim = 0;
 	private int flip = 0;
-	private boolean walking = false;
 	private int fireRate = 0;
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 3);
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
@@ -51,9 +50,6 @@ public class Player extends Mob{
 		if(fireRate > 0) { fireRate--; }
 		
 		int xa=0, ya=0;
-		
-		if(anim<7500) anim++;
-		else anim = 0;
 		
 		if(input.up)			{ ya--; animSprite = up; }
 		else if(input.down)		{ ya++; animSprite = down; }

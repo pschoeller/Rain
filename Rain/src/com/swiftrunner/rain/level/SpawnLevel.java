@@ -1,7 +1,5 @@
 package com.swiftrunner.rain.level;
 
-import com.swiftrunner.rain.entity.mob.Dummy;
-
 
 public class SpawnLevel extends Level{
 	
