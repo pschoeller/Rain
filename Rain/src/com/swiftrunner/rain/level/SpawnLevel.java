@@ -7,7 +7,7 @@ public class SpawnLevel extends Level{
 	
 	
 	public SpawnLevel(String path) { super(path); 
-		for(int i=0; i<100; i++){
+		for(int i=0; i<10; i++){
 			TileCoordinate newSpawn = new TileCoordinate(22, 62);
 			add(new Dummy(newSpawn.getX(), newSpawn.getY()));
 		}
