@@ -8,7 +8,6 @@ import com.swiftrunner.rain.graphics.Sprite;
 
 public abstract class Mob extends Entity{
 	
-	protected Sprite sprite;
 	protected boolean moving = false;
 	protected boolean walking = false;
 	protected enum Direction{ UP, DOWN, LEFT, RIGHT };

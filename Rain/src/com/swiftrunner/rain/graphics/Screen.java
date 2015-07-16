@@ -2,8 +2,8 @@ package com.swiftrunner.rain.graphics;
 
 import java.util.Random;
 
-import com.swiftrunner.rain.entity.mob.Player;
-import com.swiftrunner.rain.level.tile.Tile;
+import com.swiftrunner.rain.entity.mob.Chaser;
+import com.swiftrunner.rain.entity.mob.Mob;
 
 public class Screen {
 	
@@ -45,7 +45,7 @@ public class Screen {
 	}
 	
 	
-	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed, int flip){
+	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed){
 		if(fixed){
 			xp -= xOffset;
 			yp -= yOffset;
@@ -56,14 +56,36 @@ public class Screen {
 		for(int y=0; y<spriteHeight; y++){
 			int ya =  y + yp;
 			int ys = y;
-			if(flip == 2 || flip == 3) { ys = (spriteHeight - 1) - y; }
 			for(int x=0; x<spriteWidth; x++){
 				int xa = x + xp;
 				int xs = x;
-				if(flip == 1 || flip == 3) { xs = (spriteWidth - 1) - x; }
 				if(xa < -spriteWidth || xa >= width || ya < 0 || ya >= height) continue;
 				if(xa < 0) xa = 0;
 				int color = sprite.getPixels()[xs + ys * spriteWidth];
+				if(color != 0xffff00ff) pixels[xa + ya * width] = color;
+			}
+		}
+	}
+	
+	
+	public void renderMob(int xp, int yp, Mob mob, boolean fixed){
+		if(fixed){
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+		
+		int spriteHeight = mob.getSprite().getHeight(); 
+		int spriteWidth = mob.getSprite().getWidth(); 
+		for(int y=0; y<spriteHeight; y++){
+			int ya =  y + yp;
+			int ys = y;
+			for(int x=0; x<spriteWidth; x++){
+				int xa = x + xp;
+				int xs = x;
+				if(xa < -spriteWidth || xa >= width || ya < 0 || ya >= height) continue;
+				if(xa < 0) xa = 0;
+				int color = mob.getSprite().getPixels()[xs + ys * spriteWidth];
+				if((mob instanceof Chaser) && (color == 0xff472bbf)) color = 0xffba0015;
 				if(color != 0xffff00ff) pixels[xa + ya * width] = color;
 			}
 		}

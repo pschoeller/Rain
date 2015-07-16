@@ -89,6 +89,6 @@ public class Player extends Mob{
 
 	public void render(Screen screen){
 		sprite = animSprite.getSprite();
-		screen.renderSprite(x, y, sprite, true, 0);	
+		screen.renderSprite(x, y, sprite, true);	
 	}
 }

@@ -5,7 +5,7 @@ import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
 import com.swiftrunner.rain.graphics.SpriteSheet;
 
-public class Dummy extends Mob{
+public class Chaser extends Mob{
 	
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.dummy_up, 32, 32, 3);
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.dummy_down, 32, 32, 3);
@@ -18,25 +18,14 @@ public class Dummy extends Mob{
 	private int ya = 0;
 	
 	
-	public Dummy(int x, int y){
+	public Chaser(int x, int y){
 		this.x = x << 32;
 		this.y = y << 32;
 		sprite = Sprite.dummy;
 	}
-	
+
 	
 	public void update(){
-		time++;
-		if(time >= 100000) time = 1;
-		if(time % (random.nextInt(50) + 30) == 0){
-			xa = random.nextInt(3) - 1;
-			ya = random.nextInt(3) - 1;
-			if(random.nextInt(3) == 0){
-				xa = 0;
-				ya = 0;
-			}
-		}
-		
 		if (walking) animSprite.update();
 		else animSprite.setFrame(0);
 		
@@ -57,6 +46,7 @@ public class Dummy extends Mob{
 	
 	public void render(Screen screen){
 		sprite = animSprite.getSprite();
-		screen.renderSprite(x, y, sprite, true);
+		screen.renderMob(x, y, this, true);
 	}
+
 }
