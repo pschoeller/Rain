@@ -13,6 +13,10 @@ public class Dummy extends Mob{
 	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.dummy_right, 32, 32, 3);
 	private AnimatedSprite animSprite = down;
 	
+	private int time=0;
+	int xa = 0;
+	int ya = 0;
+	
 	
 	
 	public Dummy(int x, int y){
@@ -22,10 +26,18 @@ public class Dummy extends Mob{
 	}
 	
 	
-	public void update(){		
-		int xa = 0;
-		int ya = 0;
-		ya--;
+	public void update(){
+		time++;
+		if(time >= 100000) time = 1;
+		if(time % (random.nextInt(50) + 30) == 0){
+			xa = random.nextInt(3) - 1;
+			ya = random.nextInt(3) - 1;
+			if(random.nextInt(3) == 0){
+				xa = 0;
+				ya = 0;
+			}
+		}
+		
 		if (walking) animSprite.update();
 		else animSprite.setFrame(0);
 		
