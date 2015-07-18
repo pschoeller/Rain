@@ -23,16 +23,17 @@ public class Chaser extends Mob{
 		this.y = y << 32;
 		sprite = Sprite.dummy;
 	}
-
 	
-	public void update(){
-		if (walking) animSprite.update();
-		else animSprite.setFrame(0);
+	
+	private void move(){
+		xa = 0;
+		ya = 0;
+		Player player = level.getClientPlayer();
 		
-		if(ya < 0)		{ dir = Direction.UP; animSprite = up; }
-		else if(ya > 0)	{ dir = Direction.DOWN; animSprite = down; }
-		if(xa < 0)		{ dir = Direction.LEFT; animSprite = left; }
-		else if(xa > 0)	{ dir = Direction.RIGHT; animSprite = right; }
+		if(x < player.getX()) xa++;
+		if(x > player.getX()) xa--;
+		if(y < player.getY()) ya++;
+		if(y > player.getY()) ya--;
 		
 		if(xa != 0 || ya != 0) {
 			move(xa, ya);
@@ -41,6 +42,19 @@ public class Chaser extends Mob{
 		else{
 			walking = false;
 		}
+	}
+
+	
+	public void update(){
+		move();
+		
+		if (walking) animSprite.update();
+		else animSprite.setFrame(0);
+		
+		if(ya < 0)		{ dir = Direction.UP; animSprite = up; }
+		else if(ya > 0)	{ dir = Direction.DOWN; animSprite = down; }
+		if(xa < 0)		{ dir = Direction.LEFT; animSprite = left; }
+		else if(xa > 0)	{ dir = Direction.RIGHT; animSprite = right; }
 	}
 	
 	

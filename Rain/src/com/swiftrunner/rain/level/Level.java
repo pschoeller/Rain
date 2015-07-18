@@ -8,6 +8,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import com.swiftrunner.rain.entity.Entity;
+import com.swiftrunner.rain.entity.mob.Player;
 import com.swiftrunner.rain.entity.particle.Particle;
 import com.swiftrunner.rain.entity.projectile.Projectile;
 import com.swiftrunner.rain.graphics.Screen;
@@ -22,6 +23,7 @@ public class Level {
 	private List<Entity> entities = new ArrayList<Entity>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 	private List<Particle> particles = new ArrayList<Particle>();
+	private List<Player> players = new ArrayList<Player>();
 	
 	
 	public Level(int width, int height){
@@ -40,6 +42,9 @@ public class Level {
 	
 	protected void generateLevel(){}
 	private void time(){}
+	public List<Player> getPlayers() { return players; }
+	public Player getPlayerAt(int index) { return players.get(index); }
+	public Player getClientPlayer() { return players.get(0); }
 	
 	
 	public boolean tileCollision(int x, int y, int size, int xOffset, int yOffset){
@@ -66,6 +71,10 @@ public class Level {
 			particles.get(i).update();
 		}
 		
+		for(int i=0; i<players.size(); i++){
+			players.get(i).update();
+		}
+		
 		remove();
 	}
 	
@@ -87,7 +96,13 @@ public class Level {
 			if(particles.get(i).isRemoved()){
 				particles.remove(i);
 			}
-		}		
+		}
+		
+		for(int i=0; i<players.size(); i++){
+			if(players.get(i).isRemoved()){
+				players.remove(i);
+			}
+		}
 	}
 	
 	
@@ -103,9 +118,6 @@ public class Level {
 			e.printStackTrace();
 			System.out.println("Exception! Could not load level file.");
 		}
-		
-//		TileCoordinate newSpawn = new TileCoordinate(22, 62);
-//		add(new Dummy(newSpawn.getX(), newSpawn.getY()));
 	}
 	
 	
@@ -131,6 +143,10 @@ public class Level {
 		for(int i=0; i<particles.size(); i++){
 			particles.get(i).render(screen);
 		}
+		
+		for(int i=0; i<players.size(); i++){
+			players.get(i).render(screen);
+		}
 	}
 	
 	
@@ -154,6 +170,8 @@ public class Level {
 			particles.add((Particle)e);
 		}else if(e instanceof Projectile){
 			projectiles.add((Projectile) e);
+		}else if(e instanceof Player){
+			players.add((Player) e);
 		}else{
 			entities.add(e);			 
 		}
