@@ -1,5 +1,8 @@
 package com.swiftrunner.rain.entity.mob;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.swiftrunner.rain.graphics.AnimatedSprite;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
@@ -28,12 +31,15 @@ public class Chaser extends Mob{
 	private void move(){
 		xa = 0;
 		ya = 0;
-		Player player = level.getClientPlayer();
-		
-		if(x < player.getX()) xa++;
-		if(x > player.getX()) xa--;
-		if(y < player.getY()) ya++;
-		if(y > player.getY()) ya--;
+		List<Player> players = level.getPlayers(this, 50);
+
+		if(players.size() > 0){ 
+			Player player = players.get(0);
+			if(x < player.getX()) xa++;
+			if(x > player.getX()) xa--;
+			if(y < player.getY()) ya++;
+			if(y > player.getY()) ya--;
+		}
 		
 		if(xa != 0 || ya != 0) {
 			move(xa, ya);

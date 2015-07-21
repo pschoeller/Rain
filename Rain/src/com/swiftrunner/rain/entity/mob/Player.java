@@ -1,6 +1,9 @@
 package com.swiftrunner.rain.entity.mob;
 
+import java.util.List;
+
 import com.swiftrunner.rain.Game;
+import com.swiftrunner.rain.entity.Entity;
 import com.swiftrunner.rain.entity.projectile.WizardProjectile;
 import com.swiftrunner.rain.graphics.AnimatedSprite;
 import com.swiftrunner.rain.graphics.Screen;
