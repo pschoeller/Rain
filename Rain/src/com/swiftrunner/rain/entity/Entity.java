@@ -11,7 +11,7 @@ public abstract class Entity {
 	
 	private boolean removed=false;
 	
-	protected int x, y;
+	protected double x, y;
 	protected Level level;
 	protected final Random random = new Random();
 	protected Sprite sprite = null;
@@ -28,13 +28,13 @@ public abstract class Entity {
 	
 	
 	public void update(){}
-	public void render(Screen screen) { if(sprite != null) screen.renderSprite(x, y, sprite, true); }
+	public void render(Screen screen) { if(sprite != null) screen.renderSprite((int)x, (int)y, sprite, true); }
 	public Sprite getSprite() { return sprite; }
 	public void remove(){ removed = true; }
 	public boolean isRemoved(){ return removed; }
-	public int getX() { return x; }
+	public double getX() { return x; }
 	public void setX(int x) { this.x = x; }
-	public int getY() { return y; }
+	public double getY() { return y; }
 	public void setY(int y) { this.y = y; }
 	public void init(Level level) { this.level = level; }	
 }

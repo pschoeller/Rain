@@ -6,7 +6,7 @@ import com.swiftrunner.rain.graphics.Sprite;
 
 public class WizardProjectile extends Projectile{
 
-	public WizardProjectile(int x, int y, double dir) {
+	public WizardProjectile(double x, double y, double dir) {
 		super(x, y, dir);
 		range = random.nextInt(100) + 150;
 		speed = 5;

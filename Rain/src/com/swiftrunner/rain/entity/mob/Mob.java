@@ -9,6 +9,7 @@ public abstract class Mob extends Entity{
 	
 	protected boolean moving = false;
 	protected boolean walking = false;
+	protected double speed = 1.0;
 	protected enum Direction{ UP, DOWN, LEFT, RIGHT };
 	protected Direction dir;
 	
@@ -24,13 +25,28 @@ public abstract class Mob extends Entity{
 		if(ya>0) dir = Direction.UP;
 		if(ya<0) dir = Direction.DOWN;
 		
-		for(int y=0; y < Math.abs(ya); y++){
-			if(!collision(abs(xa), ya)) this.y += abs(ya);
+		while(xa != 0){
+			if(Math.abs(xa) > 1){
+				if(!collision(abs(xa), ya)){ this.x += abs(xa); }
+				xa -= abs(xa);
+			}
+			else{
+				if(!collision(abs(xa), ya)){ this.x += xa; }
+				xa = 0;
+			}
 		}
 		
-		for(int x=0; x < Math.abs(xa); x++){
-			if(!collision(xa, abs(ya))) this.x += abs(xa);
+		while(ya != 0){
+			if(Math.abs(ya) > 1){
+				if(!collision(xa, abs(ya))){ this.y += abs(ya); }
+				ya -= abs(ya);
+			}
+			else{
+				if(!collision(xa, abs(ya))){ this.y += ya; }
+				ya = 0;
+			}
 		}
+		
 	}
 	
 	
@@ -40,7 +56,7 @@ public abstract class Mob extends Entity{
 	}
 	
 	
-	protected void shoot(int x, int y, double dir){
+	protected void shoot(double x, double y, double dir){
 		level.add(new WizardProjectile(x, y, dir));
 	}
 	

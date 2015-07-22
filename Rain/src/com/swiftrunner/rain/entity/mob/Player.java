@@ -47,12 +47,12 @@ public class Player extends Mob{
 		
 		if(fireRate > 0) { fireRate--; }
 		
-		int xa=0, ya=0;
+		double xa=0, ya=0;
 		
-		if(input.up)			{ ya -= 2; animSprite = up; }
-		else if(input.down)		{ ya += 2; animSprite = down; }
-		if(input.left)			{ xa -= 2; animSprite = left; }
-		else if(input.right)	{ xa += 2; animSprite = right; }
+		if(input.up)			{ ya -= speed; animSprite = up; }
+		else if(input.down)		{ ya += speed; animSprite = down; }
+		if(input.left)			{ xa -= speed; animSprite = left; }
+		else if(input.right)	{ xa += speed; animSprite = right; }
 		
 		if(xa != 0 || ya != 0) {
 			move(xa, ya);
@@ -79,7 +79,7 @@ public class Player extends Mob{
 			double dx = Mouse.getX() - Game.getWindowWidth()/2;
 			double dy = Mouse.getY() - Game.getWindowHeight()/2;
 			double dir = Math.atan2(dy, dx);
-			shoot(x, y, dir);
+			shoot((int)x, (int)y, dir);
 			fireRate = WizardProjectile.getRateOfFire();
 		}
 	}
@@ -87,6 +87,6 @@ public class Player extends Mob{
 
 	public void render(Screen screen){
 		sprite = animSprite.getSprite();
-		screen.renderSprite(x, y, sprite, true);	
+		screen.renderSprite((int)x, (int)y, sprite, true);	
 	}
 }
