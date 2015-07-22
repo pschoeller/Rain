@@ -11,7 +11,6 @@ import com.swiftrunner.rain.level.tile.spawn.SpawnWaterTile;
 
 public class Tile {
 	
-	private int x, y;
 	private Sprite sprite;
 	
 	
