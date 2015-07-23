@@ -28,4 +28,12 @@ public class Vector2i {
 		this.y -= vector.y;
 		return this;
 	}
+	
+	
+	public boolean equals(Object object){
+		if(!(object instanceof Vector2i)){ return false; }
+		Vector2i vec = (Vector2i)object;
+		if((vec.getX() == this.x) && (vec.getY() == this.y)) { return true; }
+		return false;
+	}
 }
