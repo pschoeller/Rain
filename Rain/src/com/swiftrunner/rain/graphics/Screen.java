@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.swiftrunner.rain.entity.mob.Chaser;
 import com.swiftrunner.rain.entity.mob.Mob;
+import com.swiftrunner.rain.entity.mob.Star;
 
 public class Screen {
 	
@@ -86,6 +87,7 @@ public class Screen {
 				if(xa < 0) xa = 0;
 				int color = mob.getSprite().getPixels()[xs + ys * spriteWidth];
 				if((mob instanceof Chaser) && (color == 0xff472bbf)) color = 0xffba0015;
+				if((mob instanceof Star) && (color == 0xff472bbf)) color = 0xffe8e83a;
 				if(color != 0xffff00ff) pixels[xa + ya * width] = color;
 			}
 		}

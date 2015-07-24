@@ -6,8 +6,10 @@ import com.swiftrunner.rain.graphics.AnimatedSprite;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
 import com.swiftrunner.rain.graphics.SpriteSheet;
+import com.swiftrunner.rain.level.Node;
+import com.swiftrunner.rain.maths.Vector2i;
 
-public class Chaser extends Mob{
+public class Star extends Mob{
 	
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.dummy_up, 32, 32, 3);
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.dummy_down, 32, 32, 3);
@@ -19,8 +21,10 @@ public class Chaser extends Mob{
 	private double xa = 0;
 	private double ya = 0;
 	
+	private List<Node> path = null;
 	
-	public Chaser(int x, int y){
+	
+	public Star(int x, int y){
 		this.x = x << 32;
 		this.y = y << 32;
 		this.speed = 0.5;
@@ -31,14 +35,20 @@ public class Chaser extends Mob{
 	private void move(){
 		xa = 0;
 		ya = 0;
-		List<Player> players = level.getPlayers(this, 75);
-
-		if(players.size() > 0){ 
-			Player player = players.get(0);
-			if(x < player.getX()) xa += speed;
-			if(x > player.getX()) xa -= speed;
-			if(y < player.getY()) ya += speed;
-			if(y > player.getY()) ya -= speed;
+		int px = (int)level.getPlayerAt(0).getX();
+		int py = (int)level.getPlayerAt(0).getY();
+		Vector2i start = new Vector2i((int)getX() >> 4, (int)getY() >> 4);
+		Vector2i dest = new Vector2i(px >> 4, py >> 4);
+		if(time % 3 == 0) path = level.findPath(start, dest);
+		
+		if(path != null){
+			if(path.size() > 0){
+				Vector2i vec = path.get(path.size() - 1).tile;
+				if(x < vec.getX() << 4){ x++; }
+				if(x > vec.getX() << 4){ x--; }
+				if(y < vec.getY() << 4){ y++; }
+				if(y > vec.getY() << 4){ y--; }
+			}
 		}
 		
 		if(xa != 0 || ya != 0) {
@@ -52,6 +62,8 @@ public class Chaser extends Mob{
 
 	
 	public void update(){
+		//if(time++ % 10000 == 0) time = 0;
+		time++;
 		move();
 		
 		if (walking) animSprite.update();
@@ -68,5 +80,4 @@ public class Chaser extends Mob{
 		sprite = animSprite.getSprite();
 		screen.renderMob((int)x, (int)y, this, true);
 	}
-
 }

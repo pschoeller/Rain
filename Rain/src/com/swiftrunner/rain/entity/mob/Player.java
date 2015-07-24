@@ -33,6 +33,7 @@ public class Player extends Mob{
 		this.x = x;
 		this.y = y;
 		this.input = input;
+		this.speed = 2.0;
 		sprite = Sprite.player_back_1;
 		fireRate = WizardProjectile.getRateOfFire();
 	}
