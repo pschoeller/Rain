@@ -162,20 +162,21 @@ public class Level {
 	}
 	
 	
-	public List<Node> findPath(Vector2i start, Vector2i end){
+	public List<Node> findPath(Vector2i start, Vector2i goal){
 		List<Node> openList = new ArrayList<Node>();
 		List<Node> closedList = new ArrayList<Node>();
-		Node current = new Node(start, null, 0, getDistance(start, end));
+		Node current = new Node(start, null, 0, getDistance(start, goal));
 		openList.add(current);
 		
 		while(openList.size() > 0){
 			Collections.sort(openList, nodeSorter);
 			current = openList.get(0);
-			if(current.tile.equals(end)){
+			if(current.tile.equals(goal)){
 				List<Node> path = new ArrayList<Node>();
 				while(current.parent != null){
 					path.add(current);
 					current = current.parent;
+//					System.out.println(path.size());
 				}
 				openList.clear();
 				closedList.clear();
@@ -196,8 +197,9 @@ public class Level {
 				if(at.solid()) continue;
 				
 				Vector2i a = new Vector2i(x + xi, y + yi);
-				double gCost = current.gCost + getDistance(current.tile, a);
-				double hCost = getDistance(a, end);
+				double gCost = current.gCost + (getDistance(current.tile, a) == 1 ? 1 : 0.95);
+				double hCost = getDistance(a, goal);
+				//System.out.println(i + ": " + x + ", " + y + ", " + (x + xi) + ", " + (y + yi) + ", " + gCost + ", " + hCost);
 				Node node = new Node(a, current, gCost, hCost);
 				
 				if(vecInList(closedList, a) && gCost >= node.gCost) continue;

@@ -9,9 +9,9 @@ public class Vector2i {
 	public Vector2i(int x, int y){ set(x, y); }
 	public Vector2i(Vector2i vector){ set(vector.x, vector.y); }
 	
-	public int getX(){ return x; }
+	public int getX(){ return this.x; }
 	public Vector2i setX(int x){ this.x = x; return this; }
-	public int getY(){ return y; }
+	public int getY(){ return this.y; }
 	public Vector2i setY(int y){ this.y = y; return this; }
 	public void set(int x, int y){ this.x = x; this.y = y; }
 	

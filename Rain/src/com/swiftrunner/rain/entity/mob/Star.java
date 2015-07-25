@@ -25,38 +25,44 @@ public class Star extends Mob{
 	
 	
 	public Star(int x, int y){
-		this.x = x << 32;
-		this.y = y << 32;
-		this.speed = 0.5;
+		this.x = x;
+		this.y = y;
+		this.speed = 1.0;
 		sprite = Sprite.dummy;
 	}
 	
 	
 	private void move(){
-		xa = 0;
-		ya = 0;
-		int px = (int)level.getPlayerAt(0).getX();
-		int py = (int)level.getPlayerAt(0).getY();
-		Vector2i start = new Vector2i((int)getX() >> 4, (int)getY() >> 4);
-		Vector2i dest = new Vector2i(px >> 4, py >> 4);
-		if(time % 3 == 0) path = level.findPath(start, dest);
+		List<Player> players = level.getPlayers(this, 50);
 		
-		if(path != null){
-			if(path.size() > 0){
-				Vector2i vec = path.get(path.size() - 1).tile;
-				if(x < vec.getX() << 4){ x++; }
-				if(x > vec.getX() << 4){ x--; }
-				if(y < vec.getY() << 4){ y++; }
-				if(y > vec.getY() << 4){ y--; }
+		if(players.size() > 0){
+			xa = 0;
+			ya = 0;
+			int px = (int)level.getPlayerAt(0).getX();
+			int py = (int)level.getPlayerAt(0).getY();
+			Vector2i start = new Vector2i((int)getX() >> 4, (int)getY() >> 4);
+			Vector2i dest = new Vector2i(px >> 4, py >> 4);
+//			System.out.println("Star: " + start.getX() + ", " + start.getY() + "\tPlayer: " + dest.getX() + ", " + dest.getY());
+			if(time % 6 == 0) path = level.findPath(start, dest);
+			
+			if(path != null){
+				if(path.size() > 0){
+					Vector2i vec = path.get(path.size() - 1).tile;
+					System.out.println("Vec: " + vec.getX() + ", " + vec.getY() + "\tPlayer: " + dest.getX() + ", " + dest.getY());
+					if(x < vec.getX()){ xa++; }
+					if(x > vec.getX()){ xa--; }
+					if(y < vec.getY()){ ya++; }
+					if(y > vec.getY()){ ya--; }
+				}
 			}
-		}
-		
-		if(xa != 0 || ya != 0) {
-			move(xa, ya);
-			walking = true;
-		}
-		else{
-			walking = false;
+			
+			if(xa != 0 || ya != 0) {
+				move(xa, ya);
+				walking = true;
+			}
+			else{
+				walking = false;
+			}
 		}
 	}
 

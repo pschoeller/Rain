@@ -32,9 +32,9 @@ public abstract class Entity {
 	public Sprite getSprite() { return sprite; }
 	public void remove(){ removed = true; }
 	public boolean isRemoved(){ return removed; }
-	public double getX() { return x; }
+	public double getX() { return this.x; }
 	public void setX(int x) { this.x = x; }
-	public double getY() { return y; }
+	public double getY() { return this.y; }
 	public void setY(int y) { this.y = y; }
 	public void init(Level level) { this.level = level; }	
 }

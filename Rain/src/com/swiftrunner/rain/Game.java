@@ -52,7 +52,7 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 		level = new SpawnLevel("/levels/spawn_level_map.png");
-		TileCoordinate playerSpawn = new TileCoordinate(19, 62);
+		TileCoordinate playerSpawn = new TileCoordinate(17, 25);
 		player = new Player(playerSpawn.getX(), playerSpawn.getY(), key);
 		level.add(player);
 		
