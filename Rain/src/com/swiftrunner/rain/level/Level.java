@@ -30,8 +30,8 @@ public class Level {
 	
 	private Comparator<Node> nodeSorter = new Comparator<Node>(){
 		public int compare(Node n0, Node n1) {
-			if(n0.fCost < n1.fCost){ return 1; }
-			if(n0.fCost > n1.fCost){ return -1; }
+			if(n0.fCost < n1.fCost){ return -1; }
+			if(n0.fCost > n1.fCost){ return 1; }
 			return 0;
 		}
 		
@@ -176,7 +176,6 @@ public class Level {
 				while(current.parent != null){
 					path.add(current);
 					current = current.parent;
-//					System.out.println(path.size());
 				}
 				openList.clear();
 				closedList.clear();
@@ -199,10 +198,11 @@ public class Level {
 				Vector2i a = new Vector2i(x + xi, y + yi);
 				double gCost = current.gCost + (getDistance(current.tile, a) == 1 ? 1 : 0.95);
 				double hCost = getDistance(a, goal);
-				//System.out.println(i + ": " + x + ", " + y + ", " + (x + xi) + ", " + (y + yi) + ", " + gCost + ", " + hCost);
 				Node node = new Node(a, current, gCost, hCost);
 				
-				if(vecInList(closedList, a) && gCost >= node.gCost) continue;
+				if(vecInList(closedList, a) && gCost >= node.gCost) {
+					continue;
+				}
 				if(!vecInList(openList, a) || gCost < node.gCost){ openList.add(node); }
 			}
 		}
