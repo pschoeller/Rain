@@ -11,7 +11,7 @@ public abstract class Entity {
 	
 	private boolean removed=false;
 	
-	protected double x, y;
+	protected int x, y;
 	protected Level level;
 	protected final Random random = new Random();
 	protected Sprite sprite = null;
@@ -32,9 +32,9 @@ public abstract class Entity {
 	public Sprite getSprite() { return sprite; }
 	public void remove(){ removed = true; }
 	public boolean isRemoved(){ return removed; }
-	public double getX() { return this.x; }
+	public int getX() { return this.x; }
 	public void setX(int x) { this.x = x; }
-	public double getY() { return this.y; }
+	public int getY() { return this.y; }
 	public void setY(int y) { this.y = y; }
 	public void init(Level level) { this.level = level; }	
 }

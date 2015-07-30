@@ -36,4 +36,12 @@ public class Vector2i {
 		if((vec.getX() == this.x) && (vec.getY() == this.y)) { return true; }
 		return false;
 	}
+	
+	
+	public static double getDistance(Vector2i v0, Vector2i v1){
+		double x = v0.getX() - v1.getX();
+		double y = v0.getY() - v1.getY();
+		
+		return Math.sqrt((x*x) + (y*y));
+	}
 }

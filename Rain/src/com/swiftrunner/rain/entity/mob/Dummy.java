@@ -46,7 +46,7 @@ public class Dummy extends Mob{
 		else if(xa > 0)	{ dir = Direction.RIGHT; animSprite = right; }
 		
 		if(xa != 0 || ya != 0) {
-			move(xa, ya);
+			//move(xa, ya);
 			walking = true;
 		}
 		else{
