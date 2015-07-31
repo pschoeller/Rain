@@ -13,6 +13,7 @@ import com.swiftrunner.rain.entity.Entity;
 import com.swiftrunner.rain.entity.mob.Player;
 import com.swiftrunner.rain.entity.particle.Particle;
 import com.swiftrunner.rain.entity.projectile.Projectile;
+import com.swiftrunner.rain.entity.spawner.ParticleSpawner;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.level.tile.Tile;
 import com.swiftrunner.rain.maths.Vector2i;
@@ -27,6 +28,7 @@ public class Level {
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 	private List<Particle> particles = new ArrayList<Particle>();
 	private List<Player> players = new ArrayList<Player>();
+	private List<ParticleSpawner> particleSpawner = new ArrayList<ParticleSpawner>();
 	
 	private Comparator<Node> nodeSorter = new Comparator<Node>(){
 		public int compare(Node n0, Node n1) {
@@ -113,6 +115,12 @@ public class Level {
 		for(int i=0; i<players.size(); i++){
 			if(players.get(i).isRemoved()){
 				players.remove(i);
+			}
+		}
+		
+		for(int i=0; i<particleSpawner.size(); i++){
+			if(particleSpawner.get(i).isRemoved()){
+				particleSpawner.remove(i);
 			}
 		}
 	}
@@ -288,6 +296,8 @@ public class Level {
 			projectiles.add((Projectile) e);
 		}else if(e instanceof Player){
 			players.add((Player) e);
+		}else if(e instanceof ParticleSpawner){
+			particleSpawner.add((ParticleSpawner) e);
 		}else{
 			entities.add(e);			 
 		}

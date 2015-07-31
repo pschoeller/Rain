@@ -1,8 +1,10 @@
 package com.swiftrunner.rain.entity.mob;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.swiftrunner.rain.entity.Entity;
+import com.swiftrunner.rain.entity.projectile.WizardProjectile;
 import com.swiftrunner.rain.graphics.AnimatedSprite;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
@@ -16,6 +18,7 @@ public class Shooter extends Mob{
 	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.dummy_left, 32, 32, 3);
 	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.dummy_right, 32, 32, 3);
 	private AnimatedSprite animSprite = down;
+	private Entity rand = null;
 	
 	private int time=0;
 	private int xa=0, ya=0;
@@ -29,8 +32,8 @@ public class Shooter extends Mob{
 	
 	
 	public void update(){
-//		time++;
-//		if(time >= 100000) time = 1;
+		time++;
+		if(time >= 100000) time = 1;
 //		if(time % (random.nextInt(50) + 30) == 0){
 //			xa = random.nextInt(3) - 1;
 //			ya = random.nextInt(3) - 1;
@@ -56,6 +59,11 @@ public class Shooter extends Mob{
 //			walking = false;
 //		}
 		
+		shootRandom();
+	}
+	
+	
+	private void shootClosest(){
 		List<Entity> entities = level.getEntities(this, 500);
 		entities.add(level.getClientPlayer());
 		
@@ -77,12 +85,29 @@ public class Shooter extends Mob{
 			double fireDir = Math.atan2(dy, dx);			
 			shoot(x, y, fireDir);
 		}
+	}
+	
+	
+	private void shootRandom(){
+		List<Entity> entities = level.getEntities(this, 500);
+		entities.add(level.getClientPlayer());
+		if(time % 60 == 0){
+			int index = random.nextInt(entities.size());
+			rand = entities.get(index);
+		}
+
 		
+		if(rand != null){
+			double dx = rand.getX() - this.x;
+			double dy = rand.getY() - this.y;
+			double fireDir = Math.atan2(dy, dx);			
+			shoot(x, y, fireDir);
+		}
 	}
 	
 	
 	public void render(Screen screen){ 
 		sprite = animSprite.getSprite(); 
-		screen.renderMob((int)x, (int)y, this, true); 
+		screen.renderMob(x, y, this, true); 
 	}
 }

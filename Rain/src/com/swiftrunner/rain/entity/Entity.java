@@ -28,7 +28,7 @@ public abstract class Entity {
 	
 	
 	public void update(){}
-	public void render(Screen screen) { if(sprite != null) screen.renderSprite((int)x, (int)y, sprite, true); }
+	public void render(Screen screen) { if(sprite != null) screen.renderSprite(x, y, sprite, true); }
 	public Sprite getSprite() { return sprite; }
 	public void remove(){ removed = true; }
 	public boolean isRemoved(){ return removed; }

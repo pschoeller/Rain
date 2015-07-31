@@ -1,7 +1,6 @@
 package com.swiftrunner.rain.entity.spawner;
 
 import com.swiftrunner.rain.entity.Entity;
-import com.swiftrunner.rain.entity.particle.Particle;
 import com.swiftrunner.rain.level.Level;
 
 public class Spawner extends Entity{

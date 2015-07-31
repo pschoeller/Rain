@@ -1,9 +1,7 @@
 package com.swiftrunner.rain.level;
 
-import com.swiftrunner.rain.entity.mob.Chaser;
 import com.swiftrunner.rain.entity.mob.Dummy;
 import com.swiftrunner.rain.entity.mob.Shooter;
-import com.swiftrunner.rain.entity.mob.Star;
 
 
 public class SpawnLevel extends Level{
