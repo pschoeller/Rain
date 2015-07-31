@@ -117,4 +117,19 @@ public class Screen {
 			}
 		}
 	}
+	
+
+	public void drawRect(int xp, int yp, int w, int h, int color, boolean fixed) {
+		for(int x = xp; x < xp + w; x++){
+			if(yp >= this.height || x < 0 || x > this.width) continue;
+			if(yp > 0) pixels[x + yp * this.width] = color;
+			pixels[x + (yp + h) * this.width] = color;
+		}
+		
+		for(int y = yp; y <= yp + h; y++){
+			if(xp >= this.width || y < 0 || y > this.height) continue;
+			if(xp > 0) pixels[xp + y * this.width] = color;
+			pixels[(xp + w) + y * this.width] = color;
+		}
+	}
 }

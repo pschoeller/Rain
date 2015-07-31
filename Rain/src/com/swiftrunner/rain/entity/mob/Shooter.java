@@ -1,14 +1,13 @@
 package com.swiftrunner.rain.entity.mob;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.swiftrunner.rain.entity.Entity;
-import com.swiftrunner.rain.entity.projectile.WizardProjectile;
 import com.swiftrunner.rain.graphics.AnimatedSprite;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
 import com.swiftrunner.rain.graphics.SpriteSheet;
+import com.swiftrunner.rain.maths.Debug;
 import com.swiftrunner.rain.maths.Vector2i;
 
 public class Shooter extends Mob{
@@ -107,7 +106,8 @@ public class Shooter extends Mob{
 	
 	
 	public void render(Screen screen){ 
-		sprite = animSprite.getSprite(); 
+		sprite = animSprite.getSprite();
+		Debug.drawRect(screen, 40, 40, 60, 40, false);
 		screen.renderMob(x, y, this, true); 
 	}
 }
