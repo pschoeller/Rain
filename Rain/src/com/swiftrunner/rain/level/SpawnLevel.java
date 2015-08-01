@@ -16,11 +16,11 @@ public class SpawnLevel extends Level{
 			
 			spawnCoord.setTileCoordinate(20, 55);
 			add(new Shooter(spawnCoord.getX(), spawnCoord.getY()));
-			spawnCoord.setTileCoordinate(20, 48);
-			add(new Shooter(spawnCoord.getX(), spawnCoord.getY()));
-			
-			spawnCoord.setTileCoordinate(15, 52);
-			add(new Dummy(spawnCoord.getX(), spawnCoord.getY()));
+//			spawnCoord.setTileCoordinate(20, 48);
+//			add(new Shooter(spawnCoord.getX(), spawnCoord.getY()));
+//			
+//			spawnCoord.setTileCoordinate(15, 52);
+//			add(new Dummy(spawnCoord.getX(), spawnCoord.getY()));
 			
 //			for(int i=0; i<10; i++){
 //				spawnCoord.setTileCoordinate(22, 62);

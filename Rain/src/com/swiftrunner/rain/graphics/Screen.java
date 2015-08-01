@@ -120,16 +120,23 @@ public class Screen {
 	
 
 	public void drawRect(int xp, int yp, int w, int h, int color, boolean fixed) {
+		if(fixed){
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+		
 		for(int x = xp; x < xp + w; x++){
-			if(yp >= this.height || x < 0 || x > this.width) continue;
+			if(x < 0 || x >= this.width || yp >= this.height) continue;
 			if(yp > 0) pixels[x + yp * this.width] = color;
-			pixels[x + (yp + h) * this.width] = color;
+			if(yp + h >= this.height) continue;
+			if(yp + h > 0 && (yp + h) < this.height) pixels[x + (yp + h) * this.width] = color;
 		}
 		
 		for(int y = yp; y <= yp + h; y++){
-			if(xp >= this.width || y < 0 || y > this.height) continue;
+			if(xp >= this.width || y < 0 || y >= this.height) continue;
 			if(xp > 0) pixels[xp + y * this.width] = color;
-			pixels[(xp + w) + y * this.width] = color;
+			if(xp + w >= this.width) continue;
+			if((xp + w) > 0 && (xp + h) < this.width) pixels[(xp + w) + y * this.width] = color;
 		}
 	}
 }
