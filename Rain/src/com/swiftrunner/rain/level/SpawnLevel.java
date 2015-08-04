@@ -22,7 +22,7 @@ public class SpawnLevel extends Level{
 //			spawnCoord.setTileCoordinate(15, 52);
 //			add(new Dummy(spawnCoord.getX(), spawnCoord.getY()));
 			
-//			for(int i=0; i<10; i++){
+//			for(int i=0; i<6; i++){
 //				spawnCoord.setTileCoordinate(22, 62);
 //				add(new Dummy(spawnCoord.getX(), spawnCoord.getY()));
 //			}

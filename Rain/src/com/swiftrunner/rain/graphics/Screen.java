@@ -100,8 +100,8 @@ public class Screen {
 			yp -= yOffset;
 		}
 		
-		int spriteHeight = sheet.getHEIGHT(); 
-		int spriteWidth = sheet.getWIDTH(); 
+		int spriteHeight = sheet.getSPRITEHEIGHT(); 
+		int spriteWidth = sheet.getSPRITEWIDTH(); 
 		for(int y=0; y<spriteHeight; y++){
 			int ya =  y + yp;
 			int ys = y;
