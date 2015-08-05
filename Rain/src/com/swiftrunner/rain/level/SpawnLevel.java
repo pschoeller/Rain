@@ -14,8 +14,8 @@ public class SpawnLevel extends Level{
 //			spawnCoord.setTileCoordinate(17, 18);
 //			add(new Star(spawnCoord.getX(), spawnCoord.getY()));
 			
-			spawnCoord.setTileCoordinate(20, 55);
-			add(new Shooter(spawnCoord.getX(), spawnCoord.getY()));
+//			spawnCoord.setTileCoordinate(20, 55);
+//			add(new Shooter(spawnCoord.getX(), spawnCoord.getY()));
 //			spawnCoord.setTileCoordinate(20, 48);
 //			add(new Shooter(spawnCoord.getX(), spawnCoord.getY()));
 //			
