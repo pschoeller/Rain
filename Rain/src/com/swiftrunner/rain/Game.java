@@ -100,8 +100,7 @@ public class Game extends Canvas implements Runnable {
 		double xScroll = (player.getX() - screen.getWidth()/2) + (spriteWidth);
 		double yScroll = (player.getY() - screen.getHeight()/2) + (spriteWidth);
 		level.render((int)xScroll, (int)yScroll, screen);
-		font.render(screen);
-		//screen.renderSheet(40, 40, SpriteSheet.player_down, false, 0);
+		font.render("\"My Game!\"", screen);
 		
 		for(int i=0; i<pixels.length; i++){
 			pixels[i] = screen.getPixels()[i];
@@ -109,8 +108,6 @@ public class Game extends Canvas implements Runnable {
 		
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-		//g.fillRect(Mouse.getX()-32, Mouse.getY()-32, 64, 64);
-		//if(Mouse.getB() != -1) g.drawString("Button: " + Mouse.getB(), 80, 80);
 		
 		g.dispose();
 		bs.show();
