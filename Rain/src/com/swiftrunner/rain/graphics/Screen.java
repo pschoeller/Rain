@@ -14,6 +14,7 @@ public class Screen {
 	private final int MAP_SIZE_MASK = MAP_SIZE - 1;
 	private int[] tiles = new int[MAP_SIZE * MAP_SIZE];
 	private int xOffset, yOffset;
+	private final int ALPHA_COL = 0xffff00ff;
 	private Random random = new Random();
 	
 	
@@ -63,7 +64,7 @@ public class Screen {
 				if(xa < -spriteWidth || xa >= width || ya < 0 || ya >= height) continue;
 				if(xa < 0) xa = 0;
 				int color = sprite.getPixels()[xs + ys * spriteWidth];
-				if(color != 0xffff00ff) pixels[xa + ya * width] = color;
+				if(color != ALPHA_COL) pixels[xa + ya * width] = color;
 			}
 		}
 	}
@@ -88,7 +89,7 @@ public class Screen {
 				int color = mob.getSprite().getPixels()[xs + ys * spriteWidth];
 				if((mob instanceof Chaser) && (color == 0xff472bbf)) color = 0xffba0015;
 				if((mob instanceof Star) && (color == 0xff472bbf)) color = 0xffe8e83a;
-				if(color != 0xffff00ff) pixels[xa + ya * width] = color;
+				if(color != ALPHA_COL) pixels[xa + ya * width] = color;
 			}
 		}
 	}
@@ -113,7 +114,7 @@ public class Screen {
 				if(xa < -spriteWidth || xa >= width || ya < 0 || ya >= height) continue;
 				if(xa < 0) xa = 0;
 				int color = sheet.getPixels()[xs + ys * spriteWidth];
-				if(color != 0xffff00ff) pixels[xa + ya * width] = color;
+				if(color != ALPHA_COL) pixels[xa + ya * width] = color;
 			}
 		}
 	}
