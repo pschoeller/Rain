@@ -74,6 +74,6 @@ public class Particle extends Entity{
 
 
 	public void render(Screen screen){
-		screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true, 0);
+		screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
 	}
 }

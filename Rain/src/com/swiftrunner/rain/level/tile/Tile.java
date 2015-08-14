@@ -40,6 +40,6 @@ public class Tile {
 	
 	
 	public void render(int x, int y, Screen screen){
-		screen.renderSprite(x<<4, y<<4, this.sprite, true, 0);
+		screen.renderSprite(x<<4, y<<4, this.sprite, true);
 	}
 }

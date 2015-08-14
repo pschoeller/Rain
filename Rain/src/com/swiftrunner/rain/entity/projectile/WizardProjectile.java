@@ -12,7 +12,7 @@ public class WizardProjectile extends Projectile{
 		speed = 1;
 		damage = 20;
 		rateOfFire = 8;
-		sprite = Sprite.wizard_arrow;
+		sprite = Sprite.rotate(Sprite.wizard_arrow, angle);
 		
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);

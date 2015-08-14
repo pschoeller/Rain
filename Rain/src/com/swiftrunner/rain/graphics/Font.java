@@ -39,7 +39,7 @@ public class Font {
 			}
 			int index = charIndex.indexOf(currentChar);
 			if(index == -1) continue;
-			screen.renderSprite(x + xOffset, y + line * 20 + yOffset, characters[index], false, 0);
+			screen.renderSprite(x + xOffset, y + line * 20 + yOffset, characters[index], false);
 		}
 	}
 }
