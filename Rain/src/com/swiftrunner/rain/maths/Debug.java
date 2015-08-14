@@ -11,6 +11,6 @@ public class Debug {
 	}
 	
 	public static void drawRect(Screen screen, int xp, int yp, int w, int h, boolean fixed){
-		screen.drawRect(xp, yp, w, h, 0xff0000, fixed);
+		drawRect(screen, xp, yp, w, h, 0xff0000, fixed);
 	}
 }

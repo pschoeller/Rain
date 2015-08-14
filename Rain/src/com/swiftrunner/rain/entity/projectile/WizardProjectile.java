@@ -1,7 +1,7 @@
 package com.swiftrunner.rain.entity.projectile;
 
 import com.swiftrunner.rain.entity.spawner.ParticleSpawner;
-import com.swiftrunner.rain.entity.spawner.Spawner;
+import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
 
 public class WizardProjectile extends Projectile{
@@ -9,7 +9,7 @@ public class WizardProjectile extends Projectile{
 	public WizardProjectile(double x, double y, double dir) {
 		super(x, y, dir);
 		range = random.nextInt(100) + 150;
-		speed = 5;
+		speed = 1;
 		damage = 20;
 		rateOfFire = 8;
 		sprite = Sprite.wizard_projectile;
@@ -21,8 +21,8 @@ public class WizardProjectile extends Projectile{
 	
 	public void update(){
 		if(level.tileCollision((int)(x + nx), (int)(y + ny), 7, 4, 4)) { 
-			remove(); 
 			level.add(new ParticleSpawner((int)x, (int)y, 44, 50, level));
+			remove(); 
 		} 
 		move();
 	}
