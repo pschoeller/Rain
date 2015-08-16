@@ -70,6 +70,30 @@ public class Screen {
 	}
 	
 	
+	public void renderTextCharacter(int xp, int yp, Sprite sprite, int color, boolean fixed){
+		if(fixed){
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+		
+		int spriteHeight = sprite.getHeight(); 
+		int spriteWidth = sprite.getWidth(); 
+		for(int y=0; y<spriteHeight; y++){
+			int ya =  y + yp;
+			int ys = y;
+			for(int x=0; x<spriteWidth; x++){
+				int xa = x + xp;
+				int xs = x;
+				if(xa < -spriteWidth || xa >= width || ya < 0 || ya >= height) continue;
+				if(xa < 0) xa = 0;
+				int col = sprite.getPixels()[xs + ys * spriteWidth];
+				if(color != ALPHA_COL && color == 0) pixels[xa + ya * width] = col;
+				else if(color != ALPHA_COL || color != 0) pixels[xa + ya * width] = color;
+			}
+		}
+	}
+	
+	
 	public void renderMob(int xp, int yp, Mob mob, boolean fixed){
 		if(fixed){
 			xp -= xOffset;

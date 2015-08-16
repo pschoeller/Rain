@@ -20,11 +20,15 @@ public class Font {
 	
 	
 	public void render(int x, int y, String text, Screen screen){
-		render(x, y, 0, text, screen);
+		render(x, y, 0, 0, text, screen);
+	}
+	
+	public void render(int x, int y, int color, String text, Screen screen){
+		render(x, y, 0, color, text, screen);
 	}
 	
 	
-	public void render(int x, int y, int spacing, String text, Screen screen){
+	public void render(int x, int y, int spacing, int color, String text, Screen screen){
 		int xOffset = 0;
 		int line = 0;
 		

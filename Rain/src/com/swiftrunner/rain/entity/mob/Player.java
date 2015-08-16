@@ -6,8 +6,12 @@ import com.swiftrunner.rain.graphics.AnimatedSprite;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
 import com.swiftrunner.rain.graphics.SpriteSheet;
+import com.swiftrunner.rain.graphics.UI.UILabel;
+import com.swiftrunner.rain.graphics.UI.UIManager;
+import com.swiftrunner.rain.graphics.UI.UIPanel;
 import com.swiftrunner.rain.input.Keyboard;
 import com.swiftrunner.rain.input.Mouse;
+import com.swiftrunner.rain.maths.Vector2i;
 
 
 
@@ -21,6 +25,7 @@ public class Player extends Mob{
 	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 32, 32, 3);
 	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 3);
 	private AnimatedSprite animSprite = down;
+	private UIManager ui;
 	
 	
 	public Player(Keyboard input){
@@ -34,8 +39,12 @@ public class Player extends Mob{
 		this.y = y;
 		this.input = input;
 		this.speed = 2.0;
-		sprite = Sprite.player_back_1;
 		fireRate = WizardProjectile.getRateOfFire();
+		sprite = Sprite.player_back_1;
+		ui = Game.getUIManager();
+		UIPanel panel = new UIPanel(new Vector2i(300-80, 0));
+		ui.addPanel(panel);
+		panel.addComponent(new UILabel(new Vector2i(-10, 1), "Hello"));
 	}
 	
 	

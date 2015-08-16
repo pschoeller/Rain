@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import com.swiftrunner.rain.entity.mob.Player;
 import com.swiftrunner.rain.graphics.Font;
 import com.swiftrunner.rain.graphics.Screen;
+import com.swiftrunner.rain.graphics.UI.UIComponent;
+import com.swiftrunner.rain.graphics.UI.UIManager;
 import com.swiftrunner.rain.input.Keyboard;
 import com.swiftrunner.rain.input.Mouse;
 import com.swiftrunner.rain.level.Level;
@@ -28,6 +30,7 @@ public class Game extends Canvas implements Runnable {
 	private static int swidth = width * scale;
 	private static int sheight = height * scale;
 	private static String title = "Rain";
+	private static  UIManager uiManager;
 	
 	private Thread thread;
 	private JFrame frame;
@@ -50,6 +53,7 @@ public class Game extends Canvas implements Runnable {
 		screen = new Screen(width, height);
 		frame = new JFrame();
 		key = new Keyboard();
+		uiManager = new UIManager();
 		level = new SpawnLevel("/levels/spawn_level_map.png");
 		TileCoordinate playerSpawn = new TileCoordinate(17, 60);
 		player = new Player(playerSpawn.getX(), playerSpawn.getY(), key);
@@ -66,6 +70,7 @@ public class Game extends Canvas implements Runnable {
 	
 	public static int getWindowWidth() { return swidth; }
 	public static int getWindowHeight() { return sheight; }
+	public static UIManager getUIManager() { return uiManager; }
 	
 	
 	public synchronized void start(){
@@ -99,7 +104,9 @@ public class Game extends Canvas implements Runnable {
 		int spriteHeight = player.getSprite().getSIZE()/2;
 		double xScroll = (player.getX() - screen.getWidth()/2) + (spriteWidth);
 		double yScroll = (player.getY() - screen.getHeight()/2) + (spriteWidth);
+		
 		level.render((int)xScroll, (int)yScroll, screen);
+		uiManager.render(screen);
 		//font.render(50, 50, -3, "Hey\nbro!", screen);
 		
 		for(int i=0; i<pixels.length; i++){
@@ -117,6 +124,7 @@ public class Game extends Canvas implements Runnable {
 	public void update(){
 		key.update();
 		level.update();
+		uiManager.update();
 	}
 	
 	public void run() {

@@ -8,7 +8,7 @@ public class WizardProjectile extends Projectile{
 	public WizardProjectile(double x, double y, double dir) {
 		super(x, y, dir);
 		range = random.nextInt(100) + 150;
-		speed = 1;
+		speed = 5;
 		damage = 20;
 		rateOfFire = 8;
 		sprite = Sprite.rotate(Sprite.wizard_arrow, angle);
