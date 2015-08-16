@@ -153,7 +153,7 @@ public class Sprite {
 		double ny_x = rotX(-angle, 0.0, 1.0);
 		double ny_y = rotY(-angle, 0.0, 1.0);
 		double x0 = rotX(-angle, -width/2.0, -height/2.0) + width/2.0;
-		double y0 = rotX(-angle, -width/2.0, -height/2.0) + height/2.0;
+		double y0 = rotY(-angle, -width/2.0, -height/2.0) + height/2.0;
 		
 		for(int y=0; y<height; y++){
 			double x1 = x0;
@@ -162,7 +162,7 @@ public class Sprite {
 				int xx = (int)x1;
 				int yy = (int)y1;
 				int col=0;
-				if(xx < 0 || xx >= width || yy < 0 || yy >= height) col = 0xffffffff;
+				if(xx < 0 || xx >= width || yy < 0 || yy >= height) col = 0xffff00ff;
 				else col = pixels[xx + yy * width];
 				result[x + y * width] = col;
 				x1 += nx_x;

@@ -1,7 +1,6 @@
 package com.swiftrunner.rain.entity.projectile;
 
 import com.swiftrunner.rain.entity.spawner.ParticleSpawner;
-import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
 
 public class WizardProjectile extends Projectile{
