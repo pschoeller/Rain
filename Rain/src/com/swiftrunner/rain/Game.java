@@ -106,7 +106,6 @@ public class Game extends Canvas implements Runnable {
 		double yScroll = (player.getY() - screen.getHeight()/2) + (spriteWidth);
 		
 		level.render((int)xScroll, (int)yScroll, screen);
-		uiManager.render(screen);
 		//font.render(50, 50, -3, "Hey\nbro!", screen);
 		
 		for(int i=0; i<pixels.length; i++){
@@ -115,6 +114,7 @@ public class Game extends Canvas implements Runnable {
 		
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		uiManager.render(g);
 		
 		g.dispose();
 		bs.show();

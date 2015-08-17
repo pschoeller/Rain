@@ -1,13 +1,15 @@
 package com.swiftrunner.rain.graphics.UI;
 
-import com.swiftrunner.rain.graphics.Screen;
+import java.awt.Color;
+import java.awt.Graphics;
+
 import com.swiftrunner.rain.maths.Vector2i;
 
 public class UIComponent {
 	
 	protected Vector2i position, offset;
-	protected int bgColor;
-	protected int fgColor;
+	protected Color color;
+
 	
 	
 	public UIComponent(Vector2i position){
@@ -20,10 +22,7 @@ public class UIComponent {
 	public void setPosition(Vector2i newPosition) { this.position = newPosition; }
 	public Vector2i getOffset() { return this.offset; }
 	public void setOffset(Vector2i newOffset) { this.offset = newOffset; }
-	public int getFGColor() { return this.fgColor; }
-	public void setFGColor(int newColor) { this.fgColor = newColor; }
-	public int getBGColor() { return this.bgColor; }
-	public void setBGColor(int newColor) { this.bgColor = newColor; }
+	public UIComponent setColor(int color) { this.color = new Color(color); return this; }
 	
 	
 	public void update(){
@@ -31,7 +30,7 @@ public class UIComponent {
 	}
 	
 	
-	public void render(Screen screen){
+	public void render(Graphics g){
 		
 	}
 }

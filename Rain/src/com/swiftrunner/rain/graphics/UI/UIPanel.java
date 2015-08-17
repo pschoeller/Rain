@@ -1,23 +1,23 @@
 package com.swiftrunner.rain.graphics.UI;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.swiftrunner.rain.graphics.Screen;
-import com.swiftrunner.rain.graphics.Sprite;
 import com.swiftrunner.rain.maths.Vector2i;
 
 public class UIPanel {
 	
 	private List<UIComponent> components = new ArrayList<UIComponent>();
-	private Vector2i position;
+	private Vector2i position, size;
+	private Color color;
 	
-	private Sprite sprite;
 	
-	
-	public UIPanel(Vector2i position){
+	public UIPanel(Vector2i position, Vector2i size){
 		this.position = position;
-		sprite = new Sprite(80, 168, 0xcacaca);
+		this.size = size;
+		color = new Color(0xcacaca);
 	}
 	
 	
@@ -34,10 +34,11 @@ public class UIPanel {
 	}
 	
 	
-	public void render(Screen screen){
-		screen.renderSprite(position.getX(), position.getY(), sprite, false);
+	public void render(Graphics g){
+		g.setColor(color);
+		g.fillRect(this.position.getX(), this.position.getY(), this.size.getX(), this.size.getY());
 		for(UIComponent component : components){
-			component.render(screen);
+			component.render(g);
 		}
 	}
 }
