@@ -1,5 +1,7 @@
 package com.swiftrunner.rain.entity.mob;
 
+import java.awt.Font;
+
 import com.swiftrunner.rain.Game;
 import com.swiftrunner.rain.entity.projectile.WizardProjectile;
 import com.swiftrunner.rain.graphics.AnimatedSprite;
@@ -17,6 +19,7 @@ import com.swiftrunner.rain.maths.Vector2i;
 
 public class Player extends Mob{
 	
+	private String name;
 	private Keyboard input;
 	private Sprite sprite;
 	private int fireRate = 0;
@@ -28,13 +31,14 @@ public class Player extends Mob{
 	private UIManager ui;
 	
 	
-	public Player(Keyboard input){
+	public Player( Keyboard input, String name){
 		this.input = input;
+		this.name = name;
 		sprite = Sprite.player_back_1;
 	}
 	
 	
-	public Player(int x, int y, Keyboard input){
+	public Player(int x, int y, Keyboard input, String name){
 		this.x = x;
 		this.y = y;
 		this.input = input;
@@ -42,13 +46,19 @@ public class Player extends Mob{
 		fireRate = WizardProjectile.getRateOfFire();
 		sprite = Sprite.player_back_1;
 		ui = Game.getUIManager();
-		UIPanel panel = new UIPanel(new Vector2i((300-80)*3, 0), new Vector2i(80*3, 168*3));
+		UIPanel panel = (UIPanel) new UIPanel(new Vector2i((300-80)*3, 0), new Vector2i(80*3, 168*3)).setColor(0x4f4f4f);
 		ui.addPanel(panel);
-		panel.addComponent(new UILabel(new Vector2i(10, 50), "Hello").setColor(0x000000));
+		UILabel nameLabel = new UILabel(new Vector2i(40, 200), name);
+		nameLabel.setColor(0xbbbbbb);
+		nameLabel.setFont(new Font("Verdana", Font.PLAIN, 24));
+		nameLabel.toggleShadow();
+		panel.addComponent(nameLabel);
 	}
 	
 	
 	public Sprite getSprite() { return sprite; }
+	public String getName() { return name; }
+	public void setName(String name) { this.name = name; }
 	
 	
 	public void update(){

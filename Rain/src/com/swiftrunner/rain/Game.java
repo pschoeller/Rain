@@ -24,8 +24,8 @@ import com.swiftrunner.rain.level.TileCoordinate;
 public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-	private static int width = 300;
-	private static int height = width/16*9;
+	private static int width = 300-80;
+	private static int height = 168;
 	private static int scale = 3;
 	private static int swidth = width * scale;
 	private static int sheight = height * scale;
@@ -47,7 +47,7 @@ public class Game extends Canvas implements Runnable {
 	
 	
 	public Game(){
-		Dimension size = new Dimension(swidth, sheight);
+		Dimension size = new Dimension(swidth + 80*3, sheight);
 		setPreferredSize(size);
 		
 		screen = new Screen(width, height);
@@ -56,7 +56,7 @@ public class Game extends Canvas implements Runnable {
 		uiManager = new UIManager();
 		level = new SpawnLevel("/levels/spawn_level_map.png");
 		TileCoordinate playerSpawn = new TileCoordinate(17, 60);
-		player = new Player(playerSpawn.getX(), playerSpawn.getY(), key);
+		player = new Player(playerSpawn.getX(), playerSpawn.getY(), key, "Alden'Kai");
 		level.add(player);
 		font = new Font();
 		
@@ -113,7 +113,7 @@ public class Game extends Canvas implements Runnable {
 		}
 		
 		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		g.drawImage(image, 0, 0, (swidth), (sheight), null);
 		uiManager.render(g);
 		
 		g.dispose();
