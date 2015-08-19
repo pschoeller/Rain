@@ -10,13 +10,10 @@ import com.swiftrunner.rain.maths.Vector2i;
 public class UIProgressBar extends UIComponent{
 	
 	private double progress;	// 0 - 100
-	private Vector2i size;
-	private Color foregroundColor;
 	
 	
 	public UIProgressBar(Vector2i position, Vector2i size) {
-		super(position);
-		this.size = size;
+		super(position, size);
 		this.foregroundColor = new Color(0xff00ff); 
 	}
 	
@@ -29,10 +26,6 @@ public class UIProgressBar extends UIComponent{
 			throw new RangeException(RangeException.BAD_BOUNDARYPOINTS_ERR, "Progress must be between 0.0 and 1.0.");
 		this.progress = progress;
 	}
-	
-	
-	public Color getForegroundColor() { return this.foregroundColor; }
-	public void setForegroundColor(int color) { this.foregroundColor = new Color(color); }
 	
 	
 	public void update() {

@@ -10,17 +10,17 @@ import com.swiftrunner.rain.maths.Vector2i;
 public class UIPanel extends UIComponent{
 	
 	private List<UIComponent> components = new ArrayList<UIComponent>();
-	private Vector2i size;
 	
 	
 	public UIPanel(Vector2i position, Vector2i size){
-		super(position);
+		super(position, size);
 		this.size = size;
 		color = new Color(0xcacaca);
 	}
 	
 	
 	public void addComponent(UIComponent component){
+		component.init(this);
 		components.add(component);
 	}
 	

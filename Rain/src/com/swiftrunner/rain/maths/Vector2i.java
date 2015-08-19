@@ -2,7 +2,7 @@ package com.swiftrunner.rain.maths;
 
 public class Vector2i {
 	
-	private int x, y;
+	protected int x, y;
 	
 	
 	public Vector2i(){ set(0, 0); }
