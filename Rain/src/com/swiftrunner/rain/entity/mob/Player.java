@@ -11,6 +11,7 @@ import com.swiftrunner.rain.graphics.SpriteSheet;
 import com.swiftrunner.rain.graphics.UI.UILabel;
 import com.swiftrunner.rain.graphics.UI.UIManager;
 import com.swiftrunner.rain.graphics.UI.UIPanel;
+import com.swiftrunner.rain.graphics.UI.UIProgressBar;
 import com.swiftrunner.rain.input.Keyboard;
 import com.swiftrunner.rain.input.Mouse;
 import com.swiftrunner.rain.maths.Vector2i;
@@ -29,6 +30,7 @@ public class Player extends Mob{
 	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 3);
 	private AnimatedSprite animSprite = down;
 	private UIManager ui;
+	private UIProgressBar uiHealthBar; 
 	
 	
 	public Player( Keyboard input, String name){
@@ -43,6 +45,7 @@ public class Player extends Mob{
 		this.y = y;
 		this.input = input;
 		this.speed = 2.0;
+		this.health = 100;
 		fireRate = WizardProjectile.getRateOfFire();
 		sprite = Sprite.player_back_1;
 		ui = Game.getUIManager();
@@ -53,6 +56,15 @@ public class Player extends Mob{
 		nameLabel.setFont(new Font("Verdana", Font.PLAIN, 24));
 		nameLabel.toggleShadow();
 		panel.addComponent(nameLabel);
+		uiHealthBar = new UIProgressBar(new Vector2i(10, 215), new Vector2i((80*3)-20, 20));
+		uiHealthBar.setColor(0x5f5f5f);
+		uiHealthBar.setForegroundColor(0xdd3030);
+		uiHealthBar.setProgress(health / 100.0);
+		panel.addComponent(uiHealthBar);
+		UILabel hpLabel = new UILabel(new Vector2i(uiHealthBar.getPosition()).add(new Vector2i(2, 15)), "HP");
+		hpLabel.setColor(0xffffff);
+		hpLabel.setFont(new Font("Verdana", Font.BOLD, 15));
+		panel.addComponent(hpLabel);
 	}
 	
 	
@@ -60,7 +72,7 @@ public class Player extends Mob{
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
 	
-	
+	int time = 0;
 	public void update(){
 		if (walking) animSprite.update();
 		else animSprite.setFrame(0);
@@ -84,6 +96,8 @@ public class Player extends Mob{
 		
 		clear();
 		updateShooting();
+		
+		uiHealthBar.setProgress((time++ % 100) / 100.0); 
 	}
 	
 	

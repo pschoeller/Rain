@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 import com.swiftrunner.rain.entity.mob.Player;
 import com.swiftrunner.rain.graphics.Font;
 import com.swiftrunner.rain.graphics.Screen;
-import com.swiftrunner.rain.graphics.UI.UIComponent;
 import com.swiftrunner.rain.graphics.UI.UIManager;
 import com.swiftrunner.rain.input.Keyboard;
 import com.swiftrunner.rain.input.Mouse;

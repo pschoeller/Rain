@@ -19,9 +19,9 @@ public class UIComponent {
 	
 	
 	public Vector2i getPosition() { return this.position; }
-	public void setPosition(Vector2i newPosition) { this.position = newPosition; }
+	public void setPosition(Vector2i position) { this.position = position; }
 	public Vector2i getOffset() { return this.offset; }
-	public void setOffset(Vector2i newOffset) { this.offset = newOffset; }
+	public void setOffset(Vector2i offset) { this.offset = offset; }
 	public UIComponent setColor(int color) { this.color = new Color(color); return this; }
 	
 	

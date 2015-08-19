@@ -7,7 +7,6 @@ import com.swiftrunner.rain.graphics.AnimatedSprite;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
 import com.swiftrunner.rain.graphics.SpriteSheet;
-import com.swiftrunner.rain.maths.Debug;
 import com.swiftrunner.rain.maths.Vector2i;
 
 public class Shooter extends Mob{

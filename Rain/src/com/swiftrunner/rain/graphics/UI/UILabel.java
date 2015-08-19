@@ -25,6 +25,7 @@ public class UILabel extends UIComponent {
 	public String getText() { return this.text; }
 	public void setText(String text) { this.text = text; }
 	public UILabel setFont(Font font) { this.font = font; return this; }
+	//public UILabel setFontSize(int size) { return this.font.deriveFont(size); }
 	public boolean getShadow() { return dropShadow; }
 	public void toggleShadow() { if(dropShadow == true) dropShadow = false; else dropShadow = true; }
 	public void setDropShadowOffset(int offset) { this.dropShadowOffset = offset; }

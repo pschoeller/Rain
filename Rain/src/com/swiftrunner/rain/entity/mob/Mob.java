@@ -3,6 +3,7 @@ package com.swiftrunner.rain.entity.mob;
 import com.swiftrunner.rain.entity.Entity;
 import com.swiftrunner.rain.entity.projectile.WizardProjectile;
 import com.swiftrunner.rain.graphics.Screen;
+import com.swiftrunner.rain.graphics.UI.UIProgressBar;
 
 
 public abstract class Mob extends Entity{
@@ -10,6 +11,7 @@ public abstract class Mob extends Entity{
 	protected boolean moving = false;
 	protected boolean walking = false;
 	protected double speed = 1.0;
+	protected int health = 100;
 	protected enum Direction{ UP, DOWN, LEFT, RIGHT };
 	protected Direction dir;
 	
