@@ -42,4 +42,9 @@ public class UIComponent {
 	public void setForegroundColor(int color) { this.foregroundColor = new Color(color); }
 	public void update(){}
 	public void render(Graphics g){}
+	
+	
+	public Vector2i getAbsolutePosition(){
+		return new Vector2i(position).add(offset);
+	}
 }

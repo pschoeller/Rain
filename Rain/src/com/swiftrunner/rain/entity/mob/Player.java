@@ -8,6 +8,7 @@ import com.swiftrunner.rain.graphics.AnimatedSprite;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
 import com.swiftrunner.rain.graphics.SpriteSheet;
+import com.swiftrunner.rain.graphics.UI.UIActionListener;
 import com.swiftrunner.rain.graphics.UI.UIButton;
 import com.swiftrunner.rain.graphics.UI.UILabel;
 import com.swiftrunner.rain.graphics.UI.UIManager;
@@ -67,7 +68,11 @@ public class Player extends Mob{
 		hpLabel.setColor(0xffffff);
 		hpLabel.setFont(new Font("Verdana", Font.BOLD, 15));
 		panel.addComponent(hpLabel);
-		button = new UIButton(new Vector2i(10, 260), new Vector2i(120, 30));
+		button = new UIButton(new Vector2i(10, 260), new Vector2i(120, 30), new UIActionListener(){
+			public void perform(){
+				System.out.println("Button pressed.");
+			}
+		});
 		button.setText("Hello");
 		panel.addComponent(button);
 	}
