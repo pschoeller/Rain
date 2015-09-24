@@ -19,5 +19,5 @@ public class Mouse implements MouseListener, MouseMotionListener{
 	public void mouseEntered(MouseEvent arg0) {}
 	public void mouseExited(MouseEvent arg0) {}
 	public void mousePressed(MouseEvent arg0) { mouseB = arg0.getButton(); }
-	public void mouseReleased(MouseEvent arg0) { mouseB = -1; }
+	public void mouseReleased(MouseEvent arg0) { mouseB = MouseEvent.MOUSE_RELEASED; }
 }

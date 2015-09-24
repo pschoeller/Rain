@@ -107,7 +107,7 @@ public class Player extends Mob{
 		clear();
 		updateShooting();
 		
-		uiHealthBar.setProgress((time++ % 100) / 100.0); 
+		uiHealthBar.setProgress(0.5f); 
 	}
 	
 	

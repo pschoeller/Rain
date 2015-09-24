@@ -3,6 +3,7 @@ package com.swiftrunner.rain.graphics.UI;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 
 import com.swiftrunner.rain.input.Mouse;
 import com.swiftrunner.rain.maths.Vector2i;
@@ -14,6 +15,7 @@ public class UIButton extends UIComponent{
 	private UILabel label;
 	
 	private boolean inside = false;
+	private boolean pressed = false;
 	
 	
 	public UIButton(Vector2i position, Vector2i size, UIActionListener actionListener) {
@@ -32,6 +34,11 @@ public class UIButton extends UIComponent{
 	public void init(UIPanel panel){
 		super.init(panel);
 		panel.addComponent(label);
+	}
+	
+	
+	public void setButtonListener(UIButtonListener buttonListener){
+		this.buttonListener = buttonListener;
 	}
 
 	
@@ -59,10 +66,22 @@ public class UIButton extends UIComponent{
 			if(!inside)
 				buttonListener.entered(this);
 			inside = true;
+			
+			if(!pressed && Mouse.getB() == MouseEvent.BUTTON1){
+				buttonListener.pressed(this);
+				pressed = true;
+			}
+			else if(pressed && Mouse.getB() == MouseEvent.MOUSE_RELEASED){
+				buttonListener.released(this);
+				pressed = false;
+				actionListener.perform();
+			}
 		}
 		else{
-			if(inside)
+			if(inside){
 				buttonListener.exited(this);
+				pressed = false;
+			}
 			inside = false;
 		}
 	}
