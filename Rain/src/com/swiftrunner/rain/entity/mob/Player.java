@@ -1,6 +1,12 @@
 package com.swiftrunner.rain.entity.mob;
 
 import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import com.swiftrunner.rain.Game;
 import com.swiftrunner.rain.entity.projectile.WizardProjectile;
@@ -10,6 +16,7 @@ import com.swiftrunner.rain.graphics.Sprite;
 import com.swiftrunner.rain.graphics.SpriteSheet;
 import com.swiftrunner.rain.graphics.UI.UIActionListener;
 import com.swiftrunner.rain.graphics.UI.UIButton;
+import com.swiftrunner.rain.graphics.UI.UIButtonListener;
 import com.swiftrunner.rain.graphics.UI.UILabel;
 import com.swiftrunner.rain.graphics.UI.UIManager;
 import com.swiftrunner.rain.graphics.UI.UIPanel;
@@ -34,6 +41,7 @@ public class Player extends Mob{
 	private UIManager ui;
 	private UIProgressBar uiHealthBar;
 	private UIButton button;
+	BufferedImage image = null, imageHover = null;
 	
 	
 	public Player( Keyboard input, String name){
@@ -75,6 +83,52 @@ public class Player extends Mob{
 		});
 		button.setText("Hello");
 		panel.addComponent(button);
+		
+		try {
+			image = ImageIO.read(new File("res/textures/home32x32.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//int originalPixels[] = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+		imageHover = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		int newPixels[] = ((DataBufferInt)imageHover.getRaster().getDataBuffer()).getData();
+		
+		for(int yyy=0; yyy<image.getHeight(); yyy++){
+			for(int xxx=0; xxx<image.getWidth(); xxx++){
+				newPixels[xxx + yyy * image.getHeight()] = image.getRGB(xxx, yyy);
+			}
+		}
+		
+		
+		for(int yy=0; yy<image.getHeight(); yy++){
+			for(int xx=0; xx<image.getWidth(); xx++){
+				int color = newPixels[xx + yy * image.getWidth()];
+				int r = ((color & 0xff0000) >> 16);
+				int g = ((color & 0xff00) >> 8);
+				int b = ((color & 0xff));
+				
+				r += 50;
+				g += 50;
+				b += 50;
+				
+				color &= 0xff000000; 
+				newPixels[xx + yy * image.getWidth()] = color |  r << 16 | g << 8 | b;
+			}
+		}
+		
+		UIButton imageButton = new UIButton(new Vector2i(10, 360), image, new UIActionListener(){
+			public void perform(){
+				System.exit(0);
+			}
+		});
+		
+		imageButton.setButtonListener(new UIButtonListener(){
+			public void entered(UIButton button){ button.setImage(imageHover); }
+			public void exited(UIButton button){ button.setImage(image); }
+		});
+		panel.addComponent(imageButton);
 	}
 	
 	
