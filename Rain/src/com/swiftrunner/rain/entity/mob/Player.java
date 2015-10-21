@@ -2,7 +2,6 @@ package com.swiftrunner.rain.entity.mob;
 
 import java.awt.Font;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 import java.io.File;
 import java.io.IOException;
 
@@ -23,6 +22,7 @@ import com.swiftrunner.rain.graphics.UI.UIPanel;
 import com.swiftrunner.rain.graphics.UI.UIProgressBar;
 import com.swiftrunner.rain.input.Keyboard;
 import com.swiftrunner.rain.input.Mouse;
+import com.swiftrunner.rain.maths.ImageUtils;
 import com.swiftrunner.rain.maths.Vector2i;
 
 
@@ -41,7 +41,7 @@ public class Player extends Mob{
 	private UIManager ui;
 	private UIProgressBar uiHealthBar;
 	private UIButton button;
-	BufferedImage image = null, imageHover = null;
+	BufferedImage image = null;
 	
 	
 	public Player( Keyboard input, String name){
@@ -91,33 +91,6 @@ public class Player extends Mob{
 			e.printStackTrace();
 		}
 		
-		//int originalPixels[] = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
-		imageHover = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-		int newPixels[] = ((DataBufferInt)imageHover.getRaster().getDataBuffer()).getData();
-		
-		for(int yyy=0; yyy<image.getHeight(); yyy++){
-			for(int xxx=0; xxx<image.getWidth(); xxx++){
-				newPixels[xxx + yyy * image.getHeight()] = image.getRGB(xxx, yyy);
-			}
-		}
-		
-		
-		for(int yy=0; yy<image.getHeight(); yy++){
-			for(int xx=0; xx<image.getWidth(); xx++){
-				int color = newPixels[xx + yy * image.getWidth()];
-				int r = ((color & 0xff0000) >> 16);
-				int g = ((color & 0xff00) >> 8);
-				int b = ((color & 0xff));
-				
-				r += 50;
-				g += 50;
-				b += 50;
-				
-				color &= 0xff000000; 
-				newPixels[xx + yy * image.getWidth()] = color |  r << 16 | g << 8 | b;
-			}
-		}
-		
 		UIButton imageButton = new UIButton(new Vector2i(10, 360), image, new UIActionListener(){
 			public void perform(){
 				System.exit(0);
@@ -125,8 +98,10 @@ public class Player extends Mob{
 		});
 		
 		imageButton.setButtonListener(new UIButtonListener(){
-			public void entered(UIButton button){ button.setImage(imageHover); }
+			public void entered(UIButton button){ button.setImage(ImageUtils.changeBrightness(image, 100)); }
 			public void exited(UIButton button){ button.setImage(image); }
+			public void pressed(UIButton button){ button.setImage(ImageUtils.changeBrightness(image, -100)); }
+			public void released(UIButton button){ button.setImage(image); }
 		});
 		panel.addComponent(imageButton);
 	}
