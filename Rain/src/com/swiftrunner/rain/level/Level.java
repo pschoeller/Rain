@@ -14,15 +14,19 @@ import com.swiftrunner.rain.entity.mob.Player;
 import com.swiftrunner.rain.entity.particle.Particle;
 import com.swiftrunner.rain.entity.projectile.Projectile;
 import com.swiftrunner.rain.entity.spawner.ParticleSpawner;
+import com.swiftrunner.rain.event.Event;
 import com.swiftrunner.rain.graphics.Screen;
+import com.swiftrunner.rain.graphics.layers.Layer;
 import com.swiftrunner.rain.level.tile.Tile;
 import com.swiftrunner.rain.maths.Vector2i;
 
-public class Level {
+public class Level extends Layer{
 	
 	protected int width, height;
 	protected int[] tiles;
 	protected int[] tilesInt;
+	
+	private int xScroll, yScroll;
 	
 	private List<Entity> entities = new ArrayList<Entity>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
@@ -36,7 +40,6 @@ public class Level {
 			if(n0.fCost > n1.fCost){ return 1; }
 			return 0;
 		}
-		
 	};
 	
 	
@@ -93,6 +96,11 @@ public class Level {
 	}
 	
 	
+	public void onEvent(Event event){
+		getClientPlayer().onEvent(event);
+	}
+	
+	
 	private void remove(){
 		for(int i=0; i<entities.size(); i++){
 			if(entities.get(i).isRemoved()){
@@ -141,7 +149,13 @@ public class Level {
 	}
 	
 	
-	public void render(int xScroll, int yScroll, Screen screen){
+	public void setScroll(int xScroll, int yScroll){
+		this.xScroll = xScroll;
+		this.yScroll = yScroll;
+	}
+	
+	
+	public void render(Screen screen){
 		screen.setOffset(xScroll, yScroll);
 		int x0=xScroll>>4; int x1=(xScroll+screen.getWidth()+16)>>4;
 		int y0=yScroll>>4; int y1=(yScroll+screen.getHeight()+16)>>4;

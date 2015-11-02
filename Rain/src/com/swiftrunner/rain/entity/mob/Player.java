@@ -1,6 +1,7 @@
 package com.swiftrunner.rain.entity.mob;
 
 import java.awt.Font;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +10,11 @@ import javax.imageio.ImageIO;
 
 import com.swiftrunner.rain.Game;
 import com.swiftrunner.rain.entity.projectile.WizardProjectile;
+import com.swiftrunner.rain.event.Event;
+import com.swiftrunner.rain.event.EventDispatcher;
+import com.swiftrunner.rain.event.EventListener;
+import com.swiftrunner.rain.event.types.MousePressedEvent;
+import com.swiftrunner.rain.event.types.MouseReleasedEvent;
 import com.swiftrunner.rain.graphics.AnimatedSprite;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.Sprite;
@@ -27,7 +33,7 @@ import com.swiftrunner.rain.maths.Vector2i;
 
 
 
-public class Player extends Mob{
+public class Player extends Mob implements EventListener {
 	
 	private String name;
 	private Keyboard input;
@@ -41,6 +47,7 @@ public class Player extends Mob{
 	private UIManager ui;
 	private UIProgressBar uiHealthBar;
 	private UIButton button;
+	private boolean shooting = false;
 	BufferedImage image = null;
 	
 	
@@ -134,26 +141,53 @@ public class Player extends Mob{
 		}
 		
 		clear();
+		
 		updateShooting();
 		
 		uiHealthBar.setProgress(0.5f); 
 	}
 	
 	
+	private void updateShooting(){
+		if(!shooting || fireRate > 0) return;
+		double dx = Mouse.getX() - Game.getWindowWidth()/2;
+		double dy = Mouse.getY() - Game.getWindowHeight()/2;
+		double dir = Math.atan2(dy, dx);
+		shoot((int)x, (int)y, dir);
+		fireRate = WizardProjectile.getRateOfFire();
+	}
+	
+	
+	public void onEvent(Event event) {		
+		EventDispatcher dispatcher = new EventDispatcher(event);
+		dispatcher.dispatch(Event.Type.MOUSE_PRESSED, (Event e) -> onMousePressed((MousePressedEvent)e));
+		dispatcher.dispatch(Event.Type.MOUSE_RELEASED, (Event e) -> onMouseReleased((MouseReleasedEvent)e));
+	}
+	
+	
+	public boolean onMousePressed(MousePressedEvent e){
+		if(Mouse.getX() > 660) return false;
+		
+		if(e.getButton() == MouseEvent.BUTTON1){
+			shooting = true;
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public boolean onMouseReleased(MouseReleasedEvent e){
+		if(e.getButton() == MouseEvent.BUTTON1){
+			shooting = false;
+			return true;
+		}
+		return false;
+	}
+	
+	
 	private void clear() {
 		for(int i=0; i<level.getProjectiles().size(); i++){
 			if(level.getProjectiles().get(i).isRemoved()){ level.getProjectiles().remove(i); }
-		}
-	}
-
-
-	private void updateShooting() {		
-		if(Mouse.getB() == 1 && fireRate <= 0){
-			double dx = Mouse.getX() - Game.getWindowWidth()/2;
-			double dy = Mouse.getY() - Game.getWindowHeight()/2;
-			double dir = Math.atan2(dy, dx);
-			shoot((int)x, (int)y, dir);
-			fireRate = WizardProjectile.getRateOfFire();
 		}
 	}
 

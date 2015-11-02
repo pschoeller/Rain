@@ -6,13 +6,18 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
 import com.swiftrunner.rain.entity.mob.Player;
+import com.swiftrunner.rain.event.Event;
+import com.swiftrunner.rain.event.EventListener;
 import com.swiftrunner.rain.graphics.Font;
 import com.swiftrunner.rain.graphics.Screen;
 import com.swiftrunner.rain.graphics.UI.UIManager;
+import com.swiftrunner.rain.graphics.layers.Layer;
 import com.swiftrunner.rain.input.Keyboard;
 import com.swiftrunner.rain.input.Mouse;
 import com.swiftrunner.rain.level.Level;
@@ -20,7 +25,7 @@ import com.swiftrunner.rain.level.SpawnLevel;
 import com.swiftrunner.rain.level.TileCoordinate;
 
 
-public class Game extends Canvas implements Runnable {
+public class Game extends Canvas implements Runnable, EventListener {
 
 	private static final long serialVersionUID = 1L;
 	private static int width = 300-80;
@@ -44,6 +49,8 @@ public class Game extends Canvas implements Runnable {
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 	
+	private List<Layer> layerStack = new ArrayList<Layer>();
+	
 	
 	public Game(){
 		Dimension size = new Dimension(swidth + 80*3, sheight);
@@ -54,6 +61,7 @@ public class Game extends Canvas implements Runnable {
 		key = new Keyboard();
 		uiManager = new UIManager();
 		level = new SpawnLevel("/levels/spawn_level_map.png");
+		addLayer(level);
 		TileCoordinate playerSpawn = new TileCoordinate(17, 60);
 		player = new Player(playerSpawn.getX(), playerSpawn.getY(), key, "Alden'Kai");
 		level.add(player);
@@ -61,7 +69,7 @@ public class Game extends Canvas implements Runnable {
 		
 		addKeyListener(key);
 		
-		Mouse mouse = new Mouse();
+		Mouse mouse = new Mouse(this);
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
 	}
@@ -70,6 +78,14 @@ public class Game extends Canvas implements Runnable {
 	public static int getWindowWidth() { return swidth; }
 	public static int getWindowHeight() { return sheight; }
 	public static UIManager getUIManager() { return uiManager; }
+	public void addLayer(Layer layer){ layerStack.add(layer); }
+	
+	
+	public void onEvent(Event event) {
+		for(int i=layerStack.size()-1; i>=0; i--){
+			layerStack.get(i).onEvent(event);
+		}
+	}
 	
 	
 	public synchronized void start(){
@@ -104,9 +120,13 @@ public class Game extends Canvas implements Runnable {
 		double xScroll = (player.getX() - screen.getWidth()/2) + (spriteWidth);
 		double yScroll = (player.getY() - screen.getHeight()/2) + (spriteWidth);
 		
-		level.render((int)xScroll, (int)yScroll, screen);
-		//font.render(50, 50, -3, "Hey\nbro!", screen);
+		level.setScroll((int)xScroll, (int)yScroll);
 		
+		// Render level layers
+		for(int i=0; i<layerStack.size(); i++){
+			layerStack.get(i).render(screen);
+		}
+
 		for(int i=0; i<pixels.length; i++){
 			pixels[i] = screen.getPixels()[i];
 		}
@@ -122,8 +142,12 @@ public class Game extends Canvas implements Runnable {
 	
 	public void update(){
 		key.update();
-		level.update();
 		uiManager.update();
+		
+		// Render level layers
+		for(int i=0; i<layerStack.size(); i++){
+			layerStack.get(i).update();
+		}
 	}
 	
 	public void run() {
