@@ -10,6 +10,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import com.swiftrunner.rain.entity.Entity;
+import com.swiftrunner.rain.entity.mob.Mob;
 import com.swiftrunner.rain.entity.mob.Player;
 import com.swiftrunner.rain.entity.particle.Particle;
 import com.swiftrunner.rain.entity.projectile.Projectile;
@@ -31,7 +32,7 @@ public class Level extends Layer{
 	private List<Entity> entities = new ArrayList<Entity>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 	private List<Particle> particles = new ArrayList<Particle>();
-	private List<Player> players = new ArrayList<Player>();
+	private List<Mob> players = new ArrayList<Mob>();
 	private List<ParticleSpawner> particleSpawner = new ArrayList<ParticleSpawner>();
 	
 	private Comparator<Node> nodeSorter = new Comparator<Node>(){
@@ -59,9 +60,9 @@ public class Level extends Layer{
 	
 	protected void generateLevel(){}
 	private void time(){}
-	public List<Player> getPlayers() { return players; }
-	public Player getPlayerAt(int index) { return players.get(index); }
-	public Player getClientPlayer() { return players.get(0); }
+	public List<Mob> getPlayers() { return players; }
+	public Mob getPlayerAt(int index) { return players.get(index); }
+	public Player getClientPlayer() { return (Player) players.get(0); }
 	
 	
 	public boolean tileCollision(int x, int y, int size, int xOffset, int yOffset){
@@ -269,13 +270,13 @@ public class Level extends Layer{
 	}
 	
 	
-	public List<Player> getPlayers(Entity e, int radius){
-		List<Player> result = new ArrayList<Player>();
+	public List<Mob> getPlayers(Entity e, int radius){
+		List<Mob> result = new ArrayList<Mob>();
 		int ex = (int)e.getX();
 		int ey = (int)e.getY();
 		
 		for(int i=0; i<players.size(); i++){
-			Player player = players.get(i);
+			Mob player = players.get(i);
 			int x = (int)player.getX();
 			int y = (int)player.getY();
 			double dx = Math.abs(x - ex);
@@ -315,6 +316,12 @@ public class Level extends Layer{
 		}else{
 			entities.add(e);			 
 		}
+	}
+	
+	
+	public void addPlayer(Mob player){
+		player.init(this);
+		players.add(player);
 	}
 	
 	

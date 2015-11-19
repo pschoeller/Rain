@@ -23,6 +23,7 @@ import com.swiftrunner.rain.input.Mouse;
 import com.swiftrunner.rain.level.Level;
 import com.swiftrunner.rain.level.SpawnLevel;
 import com.swiftrunner.rain.level.TileCoordinate;
+import com.swiftrunner.rain.net.player.NetPlayer;
 
 
 public class Game extends Canvas implements Runnable, EventListener {
@@ -65,6 +66,7 @@ public class Game extends Canvas implements Runnable, EventListener {
 		TileCoordinate playerSpawn = new TileCoordinate(17, 60);
 		player = new Player(playerSpawn.getX(), playerSpawn.getY(), key, "Alden'Kai");
 		level.add(player);
+		level.addPlayer(new NetPlayer());
 		font = new Font();
 		
 		addKeyListener(key);

@@ -34,7 +34,7 @@ public class Star extends Mob{
 	
 	
 	private void move(){
-		List<Player> players = level.getPlayers(this, 85);
+		List<Mob> players = level.getPlayers(this, 85);
 		
 		if(players.size() > 0){
 			xa = 0;
