@@ -24,6 +24,9 @@ import com.swiftrunner.rain.level.Level;
 import com.swiftrunner.rain.level.SpawnLevel;
 import com.swiftrunner.rain.level.TileCoordinate;
 import com.swiftrunner.rain.net.player.NetPlayer;
+import com.swiftrunner.raincloud.serialization.RCDatabase;
+import com.swiftrunner.raincloud.serialization.RCField;
+import com.swiftrunner.raincloud.serialization.RCObject;
 
 
 public class Game extends Canvas implements Runnable, EventListener {
@@ -47,15 +50,14 @@ public class Game extends Canvas implements Runnable, EventListener {
 	
 	private Screen screen;
 	
-	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+	private BufferedImage image;
+	private int[] pixels;
 	
 	private List<Layer> layerStack = new ArrayList<Layer>();
 	
 	
 	public Game(){
-		Dimension size = new Dimension(swidth + 80*3, sheight);
-		setPreferredSize(size);
+		setSize();
 		
 		screen = new Screen(width, height);
 		frame = new JFrame();
@@ -74,6 +76,8 @@ public class Game extends Canvas implements Runnable, EventListener {
 		Mouse mouse = new Mouse(this);
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
+		
+		save();
 	}
 	
 	
@@ -81,6 +85,42 @@ public class Game extends Canvas implements Runnable, EventListener {
 	public static int getWindowHeight() { return sheight; }
 	public static UIManager getUIManager() { return uiManager; }
 	public void addLayer(Layer layer){ layerStack.add(layer); }
+	
+	
+	private void setSize(){
+		RCDatabase db = RCDatabase.DeserializeFromFile("res/data/screen.bin");
+		
+		if(db != null){
+			RCObject obj = db.findObject("Resolution");
+			width = obj.findField("width").getInt();
+			height = obj.findField("height").getInt();
+			scale = obj.findField("scale").getInt();
+		}
+
+		Dimension size = new Dimension(width * scale + 80*3, height * scale);
+		setPreferredSize(size);
+		
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+	}
+	
+	
+	private void save(){
+		RCDatabase db = new RCDatabase("Screen");
+		
+		RCObject obj = new RCObject("Resolution");
+		obj.addField(RCField.Integer("width", width));
+		obj.addField(RCField.Integer("height", height));
+		obj.addField(RCField.Integer("scale", scale));
+		db.addObject(obj);
+		
+		db.serializeToFile("res/data/screen.bin");
+	}
+	
+	
+	private void load(){
+		
+	}
 	
 	
 	public void onEvent(Event event) {
